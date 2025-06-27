@@ -26,6 +26,7 @@ body {
   font-family: var(--font-manrope);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 * {

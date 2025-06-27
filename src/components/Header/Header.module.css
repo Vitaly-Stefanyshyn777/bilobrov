@@ -287,10 +287,6 @@
   color: #ffffff !important;
 }
 
-body {
-  position: relative;
-}
-
 .overlay {
   position: fixed;
   top: 0;
