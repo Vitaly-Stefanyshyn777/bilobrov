@@ -1,0 +1,10 @@
+.layout {
+  max-width: 83.3vw;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    max-width: 91.4vw;
+  }
+}

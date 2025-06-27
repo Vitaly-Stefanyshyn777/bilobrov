@@ -1,0 +1,265 @@
+/* Затемнення фону */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  z-index: 9999999;
+}
+
+.modal::-webkit-scrollbar {
+  width: 0.2vw;
+}
+.modal::-webkit-scrollbar-track {
+  width: 1vw;
+  background-color: rgba(254, 228, 229, 1);
+}
+.modal::-webkit-scrollbar-thumb {
+  width: 1vw;
+  background-color: var(--primary);
+}
+
+/* Вікно модалки */
+.modal {
+  position: relative;
+  background-color: var(--primary);
+
+  height: 100%;
+  width: 23.4vw;
+  /* padding: 2vw; */
+  overflow-y: scroll;
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 2vw 2vw 0 2vw;
+  padding-bottom: 2.2vw;
+
+  p {
+    font-family: Playfair Display;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 2.1vw;
+    line-height: 2.9vw;
+  }
+
+  svg {
+    width: 2.7vw;
+    height: 2.7vw;
+    stroke: black;
+    transition: stroke 0.3s;
+  }
+
+  button:hover {
+    svg {
+      stroke: var(--primary);
+    }
+  }
+}
+
+.asideTop {
+  padding: 0 2vw 2vw 2vw;
+  background-color: white;
+
+  li {
+    a,
+    button {
+      color: black;
+      font-family: Manrope;
+      font-weight: 700;
+      font-size: 1vw;
+      line-height: 100%;
+      letter-spacing: 0.01vw;
+      transition: color 0.3s;
+    }
+
+    div {
+      color: black;
+      font-family: Manrope;
+      font-weight: 700;
+      font-size: 1vw;
+      line-height: 100%;
+      letter-spacing: 0.01vw;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    div:hover {
+      svg {
+        stroke: rgb(0, 0, 0);
+      }
+    }
+
+    a:hover,
+    button:hover {
+      color: var(--primary);
+    }
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 1.2vw;
+  }
+}
+
+.asideBottom {
+  padding: 2vw;
+  /* height: 100%; */
+  width: 100%;
+  background-color: var(--primary);
+
+  li {
+    a {
+      font-family: var(--font-manrope);
+      font-weight: 500;
+      font-size: 0.8vw;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.8vw;
+      line-height: 100%;
+    }
+
+    a:hover {
+      color: rgba(255, 196, 58, 1);
+
+      svg {
+        stroke: black !important;
+      }
+    }
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 1.2vw;
+  }
+}
+
+.asideTop {
+  list-style-type: none;
+}
+
+.asideTop > li {
+  /* position: relative; */
+}
+
+.subMenu {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  opacity: 0;
+  margin-top: 1vw;
+  transition: opacity 0.3s ease;
+
+  li {
+    a {
+      font-family: var(--font-manrope);
+      font-weight: 500;
+      font-size: 0.8vw;
+      transition: color 0.3s;
+
+      line-height: 100%;
+    }
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 1vw;
+  }
+}
+
+.asideTop > li > a {
+  cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
+
+  svg {
+    width: 1.2vw;
+    height: 1.2vw;
+    stroke: #212121;
+    transition: 0.3s;
+  }
+}
+
+.toggle.active {
+  color: var(--primary);
+  svg {
+    transform: rotate(180deg);
+    stroke: var(--primary);
+  }
+}
+
+@media (max-width: 1024px) {
+  .modal {
+    width: 100%;
+  }
+
+  .menuHeader {
+    padding: 4.2vw 4.2vw 0 4.2vw;
+    padding-bottom: 8.5vw;
+    position: relative;
+
+    p {
+      font-size: 7.4vw;
+      line-height: 100%;
+    }
+
+    svg {
+      width: 11.2vw;
+      height: 11.2vw;
+    }
+  }
+
+  .subMenu {
+    margin-top: 8.5vw;
+  }
+
+  .asideTop {
+    padding: 0 4.2vw 4.2vw 4.2vw;
+    padding-bottom: 8.5vw;
+
+    li {
+      a,
+      button {
+        font-size: 4.8vw;
+      }
+
+      .toggle {
+        font-size: 4.8vw;
+
+        svg {
+          width: 5.3vw;
+          height: 5.3vw;
+        }
+      }
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 8.5vw;
+    }
+  }
+
+  .asideBottom {
+    padding: 8.5vw 4.2vw 8.5vw 4.2vw;
+
+    li {
+      a {
+        font-size: 4.2vw;
+        gap: 4.2vw;
+      }
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 6.4vw;
+    }
+  }
+}

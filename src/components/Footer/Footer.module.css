@@ -1,0 +1,399 @@
+.footer {
+  background-color: var(--primary);
+  padding: 12.2vw 0 8.3vw 0;
+
+  a {
+    transition: 0.3s;
+  }
+
+  a:hover {
+    color: #ffc43a;
+  }
+
+  .instaBlock {
+    display: flex;
+    gap: 12.8vw;
+    margin-bottom: 3.7vw;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 1.3vw;
+      width: fit-content;
+
+      div {
+        span:nth-child(1) {
+          display: block;
+          font-family: var(--font-manrope);
+          font-size: 1.3vw;
+          font-weight: 600;
+          line-height: 1.3vw;
+          margin-bottom: 0.8vw;
+        }
+
+        span:nth-child(2) {
+          display: flex;
+          align-items: center;
+          gap: 0.3vw;
+          font-family: var(--font-manrope);
+          font-size: 0.9vw;
+          font-weight: 500;
+          line-height: 1.2vw;
+
+          svg {
+            width: 1.3vw;
+            height: 1.3vw;
+            stroke: white;
+            transition: stroke 0.3s;
+          }
+        }
+      }
+    }
+
+    img {
+      width: 6.6vw;
+    }
+
+    svg {
+      width: 6.6vw;
+      height: 6.6vw;
+    }
+  }
+
+  .instaBlock:hover {
+    svg {
+      stroke: #ffc43a !important;
+    }
+  }
+
+  .instaTitle {
+    span {
+      display: block;
+      font-family: var(--font-playfair);
+      font-size: 1.2vw;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.6vw;
+      color: rgba(255, 255, 255, 1);
+      margin-bottom: 0.8vw;
+    }
+
+    p {
+      font-family: var(--font-manrope);
+      font-size: 2.7vw;
+      font-weight: 700;
+      line-height: 2.9vw;
+      color: rgba(255, 255, 255, 1);
+      max-width: 35vw;
+    }
+  }
+
+  .supportBlock {
+    .linkBlock {
+      margin-bottom: 2vw;
+
+      a {
+        display: block;
+        font-family: var(--font-manrope);
+        font-size: 1.4vw;
+        font-weight: 700;
+        line-height: 2vw;
+      }
+    }
+  }
+
+  .scheduleBlock {
+    margin-bottom: 2vw;
+
+    span {
+      display: block;
+      font-family: var(--font-manrope);
+      font-size: 0.8vw;
+      font-weight: 500;
+      line-height: 0.9vw;
+      color: #ffffff;
+      margin-bottom: 0.4vw;
+    }
+
+    p {
+      font-family: var(--font-manrope);
+      font-size: 0.8vw;
+      font-weight: 500;
+      line-height: 1vw;
+      color: #ffffff;
+      max-width: 8vw;
+    }
+  }
+
+  .tgLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    width: fit-content;
+
+    span {
+      border-bottom: 1px solid transparent;
+      transition: border 0.3s;
+    }
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.7vw;
+      height: 2.7vw;
+      background-color: rgba(230, 230, 224, 0.1);
+      border-radius: 50%;
+      transition: border-radius 0.3s, background-color 0.3s;
+
+      svg {
+        width: 1.1vw;
+        height: 1.1vw;
+        fill: #ffffff;
+        transition: fill 0.3s;
+      }
+    }
+
+    span {
+      font-family: var(--font-manrope);
+      font-size: 1vw;
+      font-weight: 600;
+      line-height: 1.3vw;
+    }
+  }
+
+  .tgLink:hover {
+    color: white;
+
+    span {
+      border-bottom: 1px solid white;
+    }
+    .icon {
+      border-radius: 0;
+      background-color: #ffffff;
+
+      svg {
+        fill: var(--primary);
+      }
+    }
+  }
+
+  .footerInfoBlocks {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.2fr;
+  }
+
+  .bilobrovFooterLogo {
+    width: 15vw;
+    height: 2.1vw;
+    margin-bottom: 3.3vw;
+  }
+
+  .paymentBlock {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5vw 0 1.2vw 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2.9vw;
+
+    ul {
+      display: flex;
+      gap: 2vw;
+
+      li svg {
+        height: 2vw;
+      }
+    }
+
+    .paymentLinks {
+      display: flex;
+      gap: 1.8vw;
+    }
+  }
+
+  .footerBottomBlock {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-family: var(--font-manrope);
+      font-size: 0.8vw;
+      font-weight: 500;
+      line-height: 0.8vw;
+      color: #ffffff;
+    }
+
+    a {
+      margin-left: 0.3vw;
+      font-family: var(--font-manrope);
+      font-size: 0.8vw;
+      font-weight: 700;
+      line-height: 0.8vw;
+      border-bottom: 1px solid rgba(255, 255, 255, 1);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    .instaBlock {
+      display: block;
+
+      img {
+        width: 19.2vw;
+      }
+
+      a {
+        gap: 5.3vw;
+        margin-bottom: 8.5vw;
+
+        div {
+          span:nth-child(1) {
+            font-size: 4.8vw;
+            line-height: 6.6vw;
+          }
+
+          span:nth-child(2) {
+            font-size: 4.2vw;
+            line-height: 100%;
+            gap: 1vw;
+
+            svg {
+              width: 6.4vw;
+              height: 6.4vw;
+            }
+          }
+        }
+      }
+    }
+
+    .instaTitle {
+      margin-bottom: 8.2vw;
+
+      span {
+        font-size: 4.8vw;
+        line-height: 100%;
+        margin-bottom: 3.2vw;
+      }
+
+      p {
+        font-size: 7.4vw;
+        line-height: 97%;
+        max-width: none;
+      }
+    }
+
+    .bilobrovFooterLogo {
+      width: 58.6vw;
+      height: 8.5vw;
+      margin-bottom: 8.5vw;
+    }
+
+    .footerInfoBlocks {
+      display: block;
+    }
+
+    .supportBlock {
+      margin-bottom: 10.6vw;
+      padding-bottom: 10.6vw;
+      border-bottom: 1px solid #ffffff77;
+
+      .linkBlock {
+        margin-bottom: 6.4vw;
+
+        a {
+          font-size: 7.4vw;
+          line-height: 100%;
+        }
+
+        a:nth-child(2) {
+          font-size: 5.3vw;
+        }
+        a:nth-child(1) {
+          margin-bottom: 3.7vw;
+        }
+      }
+
+      .scheduleBlock {
+        margin-bottom: 8.2vw;
+        span {
+          font-size: 4.2vw;
+          line-height: 120%;
+          color: #ffffffbb;
+          margin-bottom: 1vw;
+        }
+
+        p {
+          font-size: 4.2vw;
+          line-height: 150%;
+          max-width: 45vw;
+          color: #ffffffbb;
+        }
+      }
+
+      .tgLink {
+        gap: 2.6vw;
+
+        .icon {
+          width: 13.8vw;
+          height: 13.8vw;
+
+          svg {
+            width: 5.8vw;
+            height: 5.8vw;
+          }
+        }
+
+        span {
+          font-size: 4.8vw;
+          line-height: 100%;
+        }
+      }
+    }
+
+    .paymentBlock {
+      display: block;
+      border: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+
+      .paymentLinks {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 7vw;
+        gap: 5vw;
+      }
+
+      ul {
+        justify-content: center;
+        gap: 4vw;
+
+        li {
+          svg {
+            width: 12vw;
+            height: 6vw;
+          }
+        }
+      }
+    }
+
+    .footerBottomBlock {
+      flex-direction: column;
+      align-items: center;
+      gap: 7vw;
+      margin-bottom: 10.6vw;
+      padding-bottom: 10.6vw;
+      border-bottom: 1px solid #ffffff77;
+
+      p {
+        font-size: 3.7vw;
+        line-height: 100%;
+
+        a {
+          font-size: 3.7vw;
+        }
+      }
+    }
+  }
+}

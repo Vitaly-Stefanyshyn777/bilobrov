@@ -1,0 +1,267 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999999;
+}
+
+.modal {
+  position: relative;
+  background: white;
+  min-width: 83.3vw;
+
+  max-width: 90%;
+  min-width: 90%;
+  min-height: 90%;
+  display: flex;
+  flex-direction: column;
+  padding: 2.7vw;
+}
+
+.before {
+  /* background-image: url(/images/popup-side-img.avif); */
+  width: 10.4vw;
+  height: 100%;
+}
+
+.title {
+  font-family: Playfair Display;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 2.1vw;
+  line-height: 2.9vw;
+}
+
+.closeBtn {
+  position: absolute;
+  color: white;
+  top: -0.5vw;
+  right: -4vw;
+
+  svg {
+    width: 2.7vw;
+    height: 2.7vw;
+    stroke: rgb(255, 255, 255);
+    transition: 0.3s;
+  }
+}
+
+.closeBtn:hover {
+  svg {
+    transform: rotate(180deg);
+    stroke: var(--primary);
+  }
+}
+
+.list {
+  width: 100%;
+  display: flex;
+
+  li:not(:last-child) {
+    margin-bottom: 1vw;
+  }
+}
+
+.navigationContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.slide {
+  width: auto !important; /* Або вказати конкретну ширину, наприклад 200px */
+  max-width: 16vw;
+}
+
+.prevButton,
+.nextButton {
+  display: block;
+  background-color: #fff;
+  padding: 1vw;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+
+  svg {
+    fill: black;
+    width: 1.2vw;
+  }
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background-color: #f4f4f4;
+}
+
+.swiperController {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabsController {
+  display: flex;
+  gap: 2.1vw;
+
+  li {
+    font-family: Manrope, sans-serif;
+    font-size: 1.4vw;
+    font-weight: 500;
+    line-height: 1.4vw;
+    color: rgba(26, 26, 26, 0.1);
+  }
+}
+
+.tabsController {
+  display: flex;
+  gap: 20px;
+}
+
+.tabItem {
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tabItem:hover {
+  text-decoration: underline;
+}
+
+.activeTab {
+  font-family: var(--font-playfair) !important;
+  font-size: 1.6vw !important;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.6vw !important;
+  color: black !important;
+}
+
+.swiperController {
+  h2 {
+    color: #000000;
+    margin-bottom: 2vw;
+
+    span:nth-child(1) {
+      font-family: var(--font-playfair);
+      font-size: 2.7vw;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 2.7vw;
+    }
+
+    span:nth-child(2) {
+      display: block;
+      margin-top: -0.3vw;
+      font-family: var(--font-manrope);
+      font-size: 2.7vw;
+      font-weight: 500;
+      line-height: 2.7vw;
+      text-indent: 5.5vw;
+    }
+  }
+}
+
+.clear {
+  margin-top: 2vw;
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+
+  svg {
+    width: 1.2vw;
+    height: 1.2vw;
+    stroke: var(--primary);
+  }
+
+  span {
+    font-family: var(--font-manrope);
+    font-weight: 500;
+    font-size: 0.9vw;
+    line-height: 1.2vw;
+    letter-spacing: 0%;
+    color: var(--primary);
+  }
+}
+
+.mobileList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 6.4vw;
+  column-gap: 4vw;
+  overflow-y: scroll;
+  padding-right: 2vw;
+}
+
+.mobileList::-webkit-scrollbar {
+  width: 0.8vw;
+}
+.mobileList::-webkit-scrollbar-track {
+  width: 1vw;
+  background-color: rgba(254, 228, 229, 1);
+}
+.mobileList::-webkit-scrollbar-thumb {
+  width: 1vw;
+  background-color: var(--primary);
+}
+
+@media (max-width: 1024px) {
+  .modal {
+    max-width: none;
+    min-width: auto;
+    max-height: none;
+    min-height: auto;
+    height: 100%;
+    width: 100%;
+    padding: 4.2vw;
+  }
+
+  .clear {
+    margin-top: 0;
+    gap: 2vw;
+
+    svg {
+      width: 5.3vw;
+      height: 5.3vw;
+    }
+
+    span {
+      font-size: 4.2vw;
+      font-weight: 600;
+    }
+  }
+
+  .closeBtn {
+    right: 3vw;
+    top: 3vw;
+
+    svg {
+      width: 11.2vw;
+      height: 11.2vw;
+      stroke: #000000;
+    }
+  }
+
+  .swiperController {
+    margin-bottom: 8.5vw;
+    flex-direction: column;
+    align-items: start;
+    gap: 5vw;
+
+    h2 {
+      font-family: Playfair Display;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 7.4vw;
+      line-height: 100%;
+      margin-bottom: 0;
+    }
+  }
+}

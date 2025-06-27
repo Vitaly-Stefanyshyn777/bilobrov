@@ -1,0 +1,502 @@
+/* Затемнення фону */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  z-index: 99999999999999999999999999;
+}
+
+/* Вікно модалки */
+.modal {
+  position: relative;
+  background: white;
+  height: 100%;
+  width: 23.4vw;
+  padding: 2vw;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.modal::-webkit-scrollbar {
+  width: 0.2vw;
+}
+.modal::-webkit-scrollbar-track {
+  width: 1vw;
+  background-color: rgba(254, 228, 229, 1);
+}
+.modal::-webkit-scrollbar-thumb {
+  width: 1vw;
+  background-color: var(--primary);
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.2vw;
+
+  p {
+    font-family: Playfair Display;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 2.1vw;
+    line-height: 2.9vw;
+  }
+
+  svg {
+    width: 2.7vw;
+    height: 2.7vw;
+    stroke: black;
+    transition: stroke 0.3s;
+  }
+
+  button:hover {
+    svg {
+      stroke: var(--primary);
+    }
+  }
+}
+
+/* From Uiverse.io by Yaya12085 */
+.switch {
+  position: relative;
+  height: 1.5rem;
+  width: 3rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 9999px;
+  background-color: rgba(186, 186, 186, 1);
+  transition: all 0.3s ease;
+}
+
+.switch:checked {
+  background-color: var(--primary);
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  left: calc(1.5rem - 1.6rem);
+  top: calc(1.5rem - 1.6rem);
+  display: block;
+  height: 1.6rem;
+  width: 1.6rem;
+  cursor: pointer;
+  border: 1px solid rgba(100, 116, 139, 0.527);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 1);
+  transition: all 0.3s ease;
+}
+
+.switch:hover::before {
+  box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+}
+
+.switch:checked:hover::before {
+  box-shadow: 0 0 0px 8px rgba(214, 61, 68, 0.2);
+}
+
+.switch:checked:before {
+  transform: translateX(100%);
+  border-color: var(--primary);
+}
+
+.switchController {
+  margin-bottom: 2vw;
+  label {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    font-family: var(--font-manrope);
+    font-weight: 600;
+    font-size: 0.8vw;
+    line-height: 137%;
+    letter-spacing: -2%;
+  }
+
+  label:not(:last-child) {
+    margin-bottom: 0.8vw;
+  }
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+  transform: translateX(-1vw);
+
+  input {
+    width: 100%;
+    padding: 1vw 0.7vw;
+    margin: 0 auto;
+    border-radius: 83px;
+    background: rgba(26, 26, 26, 0.03);
+    color: var(--Black-40, #a7a9aa);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: var(--font-raleway);
+    font-size: 0.7vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.28px;
+    padding-left: 3vw;
+    margin-bottom: 1vw;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.7vw;
+    width: 1.2vw;
+    height: 1.2vw;
+    stroke: black;
+  }
+}
+
+.backDropCOntaienr {
+  position: relative;
+
+  max-height: 50vh;
+  overflow-y: auto;
+  .backDrop:not(:last-child) {
+    margin-bottom: 1vw;
+  }
+}
+
+.backDropCOntaienr::-webkit-scrollbar {
+  display: none;
+}
+
+.backDrop {
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.6vw;
+    cursor: pointer;
+    font-family: var(--font-manrope);
+    font-weight: 600;
+    font-size: 1vw;
+    line-height: 137%;
+    letter-spacing: 0.01vw;
+    transition: 0.5s;
+  }
+
+  label:hover {
+    color: var(--primary);
+  }
+
+  input {
+    display: block;
+  }
+
+  label:hover svg {
+    transform: rotate(180deg);
+    fill: var(--primary);
+  }
+
+  label:focus svg {
+    transform: rotate(180deg);
+  }
+
+  .list {
+    padding-left: 1.6vw;
+    margin-top: 1vw;
+    overflow-y: auto;
+    overflow-x: visible;
+    max-height: 15vw;
+
+    label {
+      font-size: 10vw;
+      font-family: var(--font-manrope);
+      font-weight: 500;
+      font-size: 0.8vw;
+      line-height: 130%;
+      letter-spacing: 0%;
+    }
+
+    label:not(:last-child) {
+      margin-bottom: 0.8vw;
+    }
+  }
+
+  .list::-webkit-scrollbar {
+    width: 0.2vw;
+  }
+  .list::-webkit-scrollbar-track {
+    width: 1vw;
+    background-color: rgba(254, 228, 229, 1);
+  }
+  .list::-webkit-scrollbar-thumb {
+    width: 1vw;
+    background-color: var(--primary);
+  }
+}
+
+.plus,
+.minus {
+  width: 0.8vw;
+  height: 0.8vw;
+  transition: 0.5s;
+}
+
+.plus {
+  fill: black;
+}
+
+.minus {
+  fill: black;
+}
+
+.qty {
+  font-family: var(--font-manrope);
+  font-weight: 600;
+  font-size: 0.6vw;
+  line-height: 100%;
+  letter-spacing: 0.01vw;
+  text-align: center;
+  background-color: rgba(255, 196, 58, 1);
+  color: var(--primary);
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  color: var(--primary);
+}
+
+/* Сховати стандартний чекбокс */
+.hiddenCheckbox {
+  display: none !important;
+}
+
+/* Стилізація контейнера чекбокса */
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Стиль для кастомного чекбокса */
+.customCheckbox input:checked + .checkboxLabel::before {
+  content: "";
+  width: 0.9vw;
+  height: 0.9vw;
+  border: 1px solid transparent; /* Зелений колір рамки */
+  background-image: url("/icons/checkMark.jpg");
+  background-size: contain;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* Стиль для кастомного чекбокса, коли він не вибраний */
+.checkboxLabel::before {
+  content: "";
+  width: 0.9vw;
+  height: 0.9vw;
+  border: 1px solid #ccc; /* Сіра рамка для невибраного чекбокса */
+  border-radius: 0;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* Стилізація тексту лейбла */
+.checkboxLabel {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  padding-left: 24px; /* Робимо місце для кастомного чекбокса */
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  /* width: 85%; */
+  background-color: var(--primary);
+  padding: 1vw 0;
+  text-transform: uppercase;
+  color: white;
+  font-family: var(--font-manrope);
+  font-weight: 700;
+  font-size: 0.8vw;
+  line-height: 100%;
+  letter-spacing: 0.01vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vw;
+  transition: 0.3s;
+  width: 100%;
+
+  svg {
+    width: 1.2vw;
+    height: 1.2vw;
+    fill: white;
+    transition: 0.3s;
+  }
+}
+
+.btn:hover {
+  background-color: #ffc43a;
+  color: black;
+
+  svg {
+    fill: black;
+  }
+}
+
+.resetFilters {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-manrope);
+  font-weight: 500;
+  font-size: 0.7vw;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: rgba(186, 186, 186, 1);
+}
+
+.resetFilters:hover {
+  color: black;
+}
+
+@media (max-width: 1024px) {
+  .resetFilters {
+    font-size: 4vw;
+    margin-bottom: 5vw;
+  }
+  .modal {
+    width: 100%;
+    padding: 4.2vw;
+    padding-bottom: 20vw;
+  }
+
+  .modal::-webkit-scrollbar {
+    width: 0.8vw;
+  }
+
+  .menuHeader {
+    margin-bottom: 8.5vw;
+    p {
+      font-size: 7.4vw;
+      line-height: 100%;
+    }
+
+    svg {
+      width: 11.2vw;
+      height: 11.2vw;
+    }
+  }
+
+  .switchController {
+    margin-bottom: 8.5vw;
+    label {
+      font-size: 4.2vw;
+      line-height: 137%;
+      gap: 5.6vw;
+    }
+
+    label:not(:last-child) {
+      margin-bottom: 4.2vw;
+    }
+  }
+
+  .backDropCOntaienr {
+    margin-bottom: 10vw;
+    .backDrop:not(:last-child) {
+      margin-bottom: 6.6vw;
+    }
+  }
+
+  .checkboxLabel {
+    font-size: 3.7vw;
+    line-height: 130%;
+  }
+
+  .checkboxLabel::before {
+    width: 5.3vw;
+    height: 5.3vw;
+  }
+
+  .customCheckbox input:checked + .checkboxLabel::before {
+    width: 5.3vw;
+    height: 5.3vw;
+    margin-right: 10px;
+  }
+
+  .backDrop {
+    label {
+      font-size: 4.8vw;
+      line-height: 137%;
+      gap: 2.6vw;
+    }
+
+    .list {
+      margin-top: 4.2vw;
+      min-height: 58vw;
+      label:not(:last-child) {
+        margin-bottom: 4.2vw;
+      }
+    }
+  }
+
+  .btn {
+    font-size: 4.2vw;
+    line-height: 100%;
+    padding: 5.3vw 0;
+    gap: 2.6vw;
+
+    svg {
+      width: 6.4vw;
+      height: 6.4vw;
+    }
+  }
+
+  .plus,
+  .minus {
+    width: 4.2vw;
+    height: 4.2vw;
+  }
+
+  .qty {
+    font-size: 3.2vw;
+    line-height: 3.2vw;
+    width: 5.3vw;
+    height: 5.3vw;
+  }
+
+  .inputContainer {
+    width: 100%;
+    margin-bottom: 7vw;
+
+    input {
+      font-size: 3.7vw;
+      padding: 4.8vw 4.8vw 4.8vw 15.4vw;
+    }
+
+    svg {
+      width: 6.4vw;
+      height: 6.4vw;
+      left: 3.7vw;
+    }
+  }
+}

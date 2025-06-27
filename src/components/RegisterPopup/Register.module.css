@@ -1,0 +1,386 @@
+/* Затемнення фону */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  z-index: 9999999;
+}
+
+.disabled {
+  background-color: rgba(249, 247, 248, 1) !important;
+  pointer-events: none !important;
+  color: rgba(117, 117, 117, 1) !important;
+
+  svg {
+    fill: rgba(117, 117, 117, 1) !important;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputWrapper input {
+  width: 100%;
+}
+
+.eyeToggleBtn {
+  position: absolute;
+  right: 0.8vw;
+  transform: translateY(80%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  img {
+    width: 1.2vw !important;
+    height: 1.2vw !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+.forgotPasswordLink {
+  margin-left: auto;
+  width: 100%;
+  text-align: right;
+  transform: translateY(-2vw);
+  font-family: Manrope;
+  font-weight: 500;
+  font-size: 0.7vw;
+  line-height: 130%;
+  color: #757575;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6vw;
+  cursor: pointer;
+
+  svg {
+    width: 1.2vw;
+    height: 1.2vw;
+    stroke: black;
+  }
+}
+
+.backLink:hover {
+  color: var(--primary);
+  svg {
+    stroke: var(--primary);
+  }
+}
+
+.modal::-webkit-scrollbar {
+  width: 0.2vw;
+}
+.modal::-webkit-scrollbar-track {
+  width: 1vw;
+  background-color: rgba(254, 228, 229, 1);
+}
+.modal::-webkit-scrollbar-thumb {
+  width: 1vw;
+  background-color: var(--primary);
+}
+
+/* Вікно модалки */
+.modal {
+  position: relative;
+  background: white;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 8.3vw;
+  overflow-y: scroll;
+
+  img {
+    width: 9.7vw;
+    margin-bottom: 1vw;
+  }
+
+  h2 {
+    font-family: Playfair Display;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2.1vw;
+    line-height: 2.9vw;
+    letter-spacing: 0%;
+    margin-bottom: 0.8vw;
+  }
+
+  p {
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 0.9vw;
+    line-height: 1.2vw;
+    letter-spacing: -2%;
+    margin-bottom: 2vw;
+  }
+
+  .min {
+    display: block;
+    margin-bottom: 1.6vw;
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 0.7vw;
+    line-height: 0.9vw;
+    letter-spacing: 0%;
+    color: #757575;
+  }
+}
+
+/* Форма */
+.form {
+  padding-top: 2vw;
+  border-top: 1px solid #efedee;
+
+  label {
+    display: block;
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 0.8vw;
+    line-height: 1vw;
+    letter-spacing: 0%;
+    margin-bottom: 0.6vw;
+
+    span {
+      color: var(--primary);
+    }
+  }
+}
+
+.form input {
+  width: 100%;
+  font-family: Manrope;
+  font-weight: 500;
+  font-size: 0.9vw;
+  line-height: 1.3vw;
+  letter-spacing: 0%;
+  padding: 0.9vw 0.8vw;
+  color: black;
+  border: 1px solid #efedee !important;
+}
+
+.form input::placeholder {
+  color: #d1cfd0;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.before {
+  width: 10.4vw;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Кнопки */
+.registerBtn {
+  display: block;
+  color: rgb(255, 255, 255);
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.8vw;
+  padding: 1vw 0;
+  text-align: center;
+  transition: 0.3s;
+  margin-bottom: 1.2vw;
+  text-transform: uppercase;
+  font-family: var(--font-manrope);
+  font-weight: 600;
+  font-size: 0.8vw;
+  line-height: 0.8vw;
+
+  span {
+    font-family: var(--font-manrope);
+    font-size: 0.8vw;
+    font-weight: 600;
+    line-height: 0.8vw;
+    text-transform: uppercase;
+    transition: color 0.5s;
+  }
+
+  svg {
+    width: 1.3vw;
+    height: 1.3vw;
+    fill: rgb(255, 255, 255);
+    transition: fill 0.3s;
+  }
+}
+
+.registerBtn:hover {
+  background: #ffc43a;
+  color: black;
+
+  svg {
+    fill: black;
+  }
+
+  span {
+    color: black;
+  }
+}
+
+.closeBtn {
+  color: white;
+  position: absolute;
+  top: 2vw;
+  right: 2vw;
+
+  svg {
+    width: 2.7vw;
+    height: 2.7vw;
+    stroke: rgb(0, 0, 0);
+    transition: stroke 0.3s;
+  }
+}
+
+.closeBtn:hover {
+  svg {
+    stroke: var(--primary);
+  }
+}
+
+.openBtn {
+  background: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.controller {
+  font-family: var(--font-manrope);
+  font-weight: 700;
+  font-size: 0.9vw;
+  line-height: 1.2vw;
+
+  button {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 1024px) {
+  .before {
+    display: none;
+  }
+
+  .modal {
+    width: 100%;
+    padding: 18.1vw 4.2vw 8vw 4.2vw;
+
+    img {
+      width: 25.3vw;
+      margin-bottom: 5.3vw;
+    }
+
+    h2 {
+      font-size: 8.5vw;
+      line-height: 100%;
+      margin-bottom: 3.2vw;
+    }
+
+    p {
+      font-size: 3.7vw;
+      line-height: 137%;
+      margin-bottom: 5.3vw;
+    }
+  }
+
+  .form {
+    padding-top: 5.3vw;
+
+    label {
+      font-size: 4.2vw;
+      line-height: 130%;
+      margin-bottom: 3.2vw;
+    }
+
+    input {
+      font-size: 4.8vw;
+      line-height: 140%;
+      padding: 4.6vw 4.2vw;
+    }
+  }
+
+  .registerBtn {
+    font-size: 4.2vw;
+    line-height: 4.2vw;
+    gap: 2.6vw;
+    padding: 5.3vw 0;
+    margin-bottom: 6.4vw;
+
+    svg {
+      width: 6.4vw;
+      height: 6.4vw;
+    }
+  }
+
+  .controller {
+    font-size: 4.5vw;
+    line-height: 137%;
+  }
+
+  .closeBtn {
+    top: 4.2vw;
+    right: 4.2vw;
+
+    svg {
+      width: 13.8vw;
+      height: 13.8vw;
+    }
+  }
+
+  .forgotPasswordLink {
+    font-size: 4.2vw;
+    transform: translateY(-6vw);
+  }
+
+  .backLink {
+    display: flex;
+    align-items: center;
+    gap: 4.2vw;
+    cursor: pointer;
+
+    svg {
+      width: 4.2vw;
+      height: 4.2vw;
+      stroke: black;
+    }
+  }
+
+  .eyeToggleBtn {
+    position: absolute;
+    right: 4.2vw;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    img {
+      width: 6.4vw !important;
+      height: 6.4vw !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}

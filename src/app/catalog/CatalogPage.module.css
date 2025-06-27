@@ -1,0 +1,228 @@
+.page {
+  /* padding-top: 15vw; */
+  padding-bottom: 8.3vw;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 0.7vw;
+  row-gap: 1.6vw;
+  margin-bottom: 3vw;
+
+  li {
+  }
+}
+
+.filterController {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2vw;
+  /* margin-top: 1vw; */
+
+  button {
+    font-family: var(--font-manrope);
+    font-weight: 700;
+    font-size: 0.8vw;
+    line-height: 0.8vw;
+    letter-spacing: 0.01vw;
+    gap: 0.5vw;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+
+    svg {
+      width: 1.2vw;
+      height: 1.2vw;
+      stroke: black;
+      transition: stroke 0.3s;
+    }
+  }
+
+  button:hover {
+    color: var(--primary);
+
+    svg {
+      stroke: var(--primary);
+    }
+  }
+}
+
+.categoryHeader {
+  h1 {
+    font-family: var(--font-manrope);
+    font-weight: 500;
+    font-size: 2vw;
+    line-height: 100%;
+    text-align: center;
+    margin-bottom: 0.8vw;
+  }
+
+  span {
+    font-family: var(--font-manrope);
+    font-weight: 600;
+    font-size: 0.8vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: rgba(26, 26, 26, 0.5);
+    display: block;
+    text-align: center;
+  }
+}
+
+.childCategories {
+  margin-top: 1.6vw;
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.2vw;
+    overflow-x: auto;
+    height: 1.5vw;
+
+    li {
+      font-family: var(--font-manrope);
+      font-weight: 500;
+      font-size: 1.2vw;
+      line-height: 100%;
+      color: rgba(26, 26, 26, 0.5);
+      transition: 0.3s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    li:hover {
+      color: rgba(26, 26, 26, 1);
+    }
+
+    .active {
+      font-family: var(--font-playfair);
+      font-size: 1.2vw;
+      font-style: italic;
+      font-weight: 600;
+      color: black;
+    }
+  }
+
+  a {
+    color: black;
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.loader::after {
+  content: "";
+  width: 2vw;
+  height: 2vw;
+  border: 0.2vw solid rgba(0, 0, 0, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .page {
+    padding-bottom: 21.3vw;
+  }
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4.2vw;
+    margin-bottom: 8.5vw;
+  }
+
+  .categoryHeader {
+    /* margin-bottom: 6.4vw; */
+
+    h1 {
+      font-size: 8.5vw;
+      line-height: 100%;
+      margin-bottom: 3.2vw;
+    }
+
+    span {
+      font-size: 3.7vw;
+      line-height: 120%;
+    }
+  }
+
+  .childCategories {
+    ul {
+      gap: 4.8vw;
+      height: 15vw;
+      justify-content: start;
+      padding-left: 4.3vw;
+      padding-right: 4.3vw;
+
+      li {
+        font-size: 4.8vw;
+        line-height: 100%;
+      }
+
+      .active {
+        font-size: 4.8vw;
+      }
+    }
+
+    ul {
+      /* Приховування скролбару для Webkit браузерів (Chrome, Safari, Opera) */
+      -webkit-overflow-scrolling: touch; /* Гладкий скролінг для мобільних */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer/Edge */
+    }
+
+    ul::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .filterController {
+    margin-top: 8.5vw;
+    margin-bottom: 6.4vw;
+
+    button {
+      font-size: 3.7vw;
+      line-height: 4.2vw;
+      gap: 1.6vw;
+
+      svg {
+        width: 5.3vw;
+        height: 5.3vw;
+      }
+    }
+  }
+}
+
+.scrollbarContainer {
+  width: 100%; /* Ширина скролбару */
+  height: 0.8vw;
+  background: #efedee;
+  border-radius: 0.4vw;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.scroller {
+  display: flex;
+  align-items: center;
+  gap: 10vw;
+}
+
+.scrollbar {
+  height: 100%;
+  width: 0; /* Початковий стан */
+  background: rgba(26, 26, 26, 1);
+  transition: width 0.1s ease-out; /* Плавне розширення */
+}
