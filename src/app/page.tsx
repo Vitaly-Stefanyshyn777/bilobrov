@@ -44,7 +44,10 @@ export default function CatalogPage() {
   const productsRef = useRef<HTMLUListElement | null>(null);
   const { t } = useTranslation();
 
-  const query = new URLSearchParams(searchParams.toString());
+  const query = useMemo(
+    () => new URLSearchParams(searchParams.toString()),
+    [searchParams]
+  );
   const {
     sort,
     selectedCategories,
@@ -76,9 +79,10 @@ export default function CatalogPage() {
   const totalCount = data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / 20);
   const { data: brandData } = useBrandsQuery();
-  const brands: Brand[] = Array.isArray(brandData)
-    ? brandData
-    : brandData?.items || [];
+  const brands: Brand[] = useMemo(
+    () => (Array.isArray(brandData) ? brandData : brandData?.items || []),
+    [brandData]
+  );
 
   const { width } = useWindowSize();
 
@@ -174,7 +178,15 @@ export default function CatalogPage() {
         );
       }
     }
-  }, [slug, parentSlug, childSlug, allCategories, searchParams.toString()]);
+  }, [
+    slug,
+    parentSlug,
+    childSlug,
+    allCategories,
+    searchParams,
+    query,
+    setSelectedCategories,
+  ]);
 
   const currentSort = sort;
   useEffect(() => {

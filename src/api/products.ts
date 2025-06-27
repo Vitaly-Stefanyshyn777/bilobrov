@@ -68,8 +68,8 @@ export const fetchVariationById = async ({
   return data;
 };
 
-export const fetchReviews = async (): Promise<any[]> => {
-  const { data } = await wcClient.get<any[]>("/products/reviews", {
+export const fetchReviews = async (): Promise<unknown[]> => {
+  const { data } = await wcClient.get<unknown[]>("/products/reviews", {
     params: { per_page: 100 },
   });
   return data;
