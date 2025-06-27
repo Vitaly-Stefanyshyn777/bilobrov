@@ -1,6 +1,7 @@
-// потрібно
 "use client";
 
+import React from "react";
+import Image from "next/image";
 import { FooterInstList } from "../FooterInstList/FooterInstList";
 import { FooterNavigationBlock } from "../FooterNavigationBlock/FooterNavigationBlock";
 import { Layout } from "../Layout/Layout";
@@ -32,7 +33,12 @@ export const Footer = () => {
             target="__blank"
             href="https://www.instagram.com/bilobrov_cosmetics/"
           >
-            <img src="/icons/footer-logo.svg" alt="Logo" />
+            <Image
+              src="/icons/footer-logo.svg"
+              alt="Logo"
+              width={290}
+              height={42}
+            />
             <div>
               <span>@bilobrov_cosmetics</span>
               <span>

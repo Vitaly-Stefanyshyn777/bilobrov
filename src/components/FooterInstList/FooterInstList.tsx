@@ -1,3 +1,5 @@
+import React from "react";
+import Image from "next/image";
 import s from "./FooterInstList.module.css";
 
 const items = [
@@ -29,7 +31,7 @@ export const FooterInstList = () => {
       {items.map((item) => (
         <li key={item.id}>
           <a href={item.link}>
-            <img src={item.image} alt="Inst" />
+            <Image src={item.image} alt="Inst" width={500} height={500} />
           </a>
         </li>
       ))}

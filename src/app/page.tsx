@@ -36,7 +36,7 @@ import { usePageData } from "@/hooks/usePageData";
 import { API_URL } from "@/constants/api";
 import type { Brand, ProductInfo } from "@/types/productTypes";
 
-export const CatalogPage: React.FC = () => {
+export default function CatalogPage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -546,6 +546,4 @@ export const CatalogPage: React.FC = () => {
       </Layout>
     </main>
   );
-};
-
-export default CatalogPage;
+}

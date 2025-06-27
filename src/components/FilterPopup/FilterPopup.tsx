@@ -26,7 +26,6 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setSelectedCategories,
     setSelectedBrands,
     setSelectedAttributes,
-    resetFilters,
     attributes,
     allCategories,
     allBrands,

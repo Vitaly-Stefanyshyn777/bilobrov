@@ -5,8 +5,6 @@ import { StarRatingRed } from "../StarRating/StarRating";
 import { useCartStore } from "../../store/useCartStore";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import Link from "next/link";
 import { ProductPageAccordion } from "../ProductPageAccordion/ProductPageAccordion";
 import { useProductStore } from "@/store/products/useProductStore";
@@ -204,24 +202,6 @@ export const ProductContent: React.FC<ProductItemProps> = ({
       display: "none", // Прибирає лінію між текстом і стрілкою
     }),
   };
-
-  const formik = useFormik({
-    initialValues: {
-      giftFrom: "",
-      giftTo: "",
-      giftEmail: "",
-      giftMessage: "",
-    },
-    validationSchema: giftSchema,
-    validateOnBlur: true,
-    validateOnChange: false,
-
-    onSubmit: (values) => {
-      if (!info) return;
-
-      openCart();
-    },
-  });
 
   if (!info.attributes || !certificates) return <p>Loading...</p>;
 
