@@ -1,35 +1,37 @@
 import { create } from "zustand";
 
-interface WishlistState {
+export interface WishlistState {
   preferences: number[];
   toggleWishlistItem: (id: number) => void;
   setWishlist: (ids: number[]) => void;
   clearWishlist: () => void;
 }
 
-export const useWishlistStore = create<WishlistState>((set, get) => ({
-  preferences:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("wishlist") || "[]")
-      : [],
+export const useWishlistStore = create<WishlistState>(
+  (set: (state: Partial<WishlistState>) => void, get: () => WishlistState) => ({
+    preferences:
+      typeof window !== "undefined"
+        ? JSON.parse(localStorage.getItem("wishlist") || "[]")
+        : [],
 
-  toggleWishlistItem: (id) => {
-    const current = get().preferences;
-    const updated = current.includes(id)
-      ? current.filter((item) => item !== id)
-      : [...current, id];
+    toggleWishlistItem: (id: number) => {
+      const current = get().preferences;
+      const updated = current.includes(id)
+        ? current.filter((item: number) => item !== id)
+        : [...current, id];
 
-    localStorage.setItem("wishlist", JSON.stringify(updated));
-    set({ preferences: updated });
-  },
+      localStorage.setItem("wishlist", JSON.stringify(updated));
+      set({ preferences: updated });
+    },
 
-  setWishlist: (ids) => {
-    localStorage.setItem("wishlist", JSON.stringify(ids));
-    set({ preferences: ids });
-  },
+    setWishlist: (ids: number[]) => {
+      localStorage.setItem("wishlist", JSON.stringify(ids));
+      set({ preferences: ids });
+    },
 
-  clearWishlist: () => {
-    localStorage.removeItem("wishlist");
-    set({ preferences: [] });
-  },
-}));
+    clearWishlist: () => {
+      localStorage.removeItem("wishlist");
+      set({ preferences: [] });
+    },
+  })
+);

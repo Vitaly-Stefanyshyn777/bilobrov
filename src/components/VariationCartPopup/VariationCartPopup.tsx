@@ -5,6 +5,7 @@ import { useProductVariationsQuery } from "@/queries/useAllProductsQuery";
 import Select, { StylesConfig } from "react-select";
 import ReactDOM from "react-dom";
 import { ProductInfo } from "../../types/productTypes";
+import Image from "next/image";
 
 import { Loader } from "../Loader/Loader";
 import { motion } from "framer-motion";
@@ -17,11 +18,17 @@ interface VariationsPopupProps {
   product: ProductInfo;
 }
 
+type OptionType = {
+  value: string;
+  label: string | React.ReactElement;
+  image?: string;
+  isDisabled?: boolean;
+};
+
 export const VariationsPopup: React.FC<VariationsPopupProps> = ({
   onSelect,
   onClose,
   productId,
-  product,
 }) => {
   const { data: productVariations = [], isLoading } =
     useProductVariationsQuery(productId);
@@ -54,9 +61,11 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
       const firstVariation = productVariations[0];
       const initialAttributes: { [key: string]: string } = {};
 
-      firstVariation.attributes.forEach((attr) => {
-        initialAttributes[attr.slug] = attr.option;
-      });
+      firstVariation.attributes.forEach(
+        (attr: { slug: string; option: string }) => {
+          initialAttributes[attr.slug] = attr.option;
+        }
+      );
 
       setSelectedAttributes(initialAttributes);
       setSelectedVariation(firstVariation.id);
@@ -65,12 +74,14 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
 
   useEffect(() => {
     if (Object.keys(selectedAttributes).length > 0) {
-      const matchedVariation = productVariations.find((v) =>
-        Object.entries(selectedAttributes).every(([key, value]) =>
-          v.attributes.some(
-            (attr) => attr.slug === key && attr.option === value
+      const matchedVariation = productVariations.find(
+        (v: { id: number; attributes: { slug: string; option: string }[] }) =>
+          Object.entries(selectedAttributes).every(([key, value]) =>
+            v.attributes.some(
+              (attr: { slug: string; option: string }) =>
+                attr.slug === key && attr.option === value
+            )
           )
-        )
       );
 
       if (matchedVariation && matchedVariation.id !== selectedVariation) {
@@ -86,7 +97,7 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
     }
   };
 
-  const customStyles: StylesConfig<any, false> = {
+  const customStyles: StylesConfig<OptionType, false> = {
     control: (provided, state) => ({
       ...provided,
       backgroundColor: "white",
@@ -204,13 +215,15 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
                     return matchesSelected && hasOption;
                   });
 
-                  const optionImage = productVariations
-                    .filter((v) =>
-                      v.attributes.some(
-                        (a) => a.slug === attribute.slug && a.option === option
+                  const optionImage =
+                    productVariations
+                      .filter((v) =>
+                        v.attributes.some(
+                          (a) =>
+                            a.slug === attribute.slug && a.option === option
+                        )
                       )
-                    )
-                    .map((v) => v.image?.src)[0];
+                      .map((v) => v.image?.src)[0] || "";
 
                   return {
                     value: option,
@@ -232,9 +245,11 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
                             label: (
                               <div className="flex items-center">
                                 {opt.image && (
-                                  <img
+                                  <Image
                                     src={opt.image}
-                                    alt={opt.label}
+                                    alt={opt.label.toString()}
+                                    width={24}
+                                    height={24}
                                     className="w-6 h-6 mr-2"
                                   />
                                 )}
@@ -248,6 +263,7 @@ export const VariationsPopup: React.FC<VariationsPopupProps> = ({
                               opt.value === selectedAttributes[attribute.slug]
                           )}
                           onChange={(option) =>
+                            option &&
                             setSelectedAttributes((prev) => ({
                               ...prev,
                               [attribute.slug]: option.value,

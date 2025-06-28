@@ -1,14 +1,12 @@
-import React, { useState } from "react";
 import s from "./ProductItem.module.css";
 import { ProductInfo } from "../../types/productTypes";
 import { StarRating } from "../StarRating/StarRating";
 import WishlistButton from "../WishlistButton/WishlistButton";
-import { VariationsPopup } from "../VariationCartPopup/VariationCartPopup";
-import { truncateHtmlString } from "../../utils/truncateHtmlString";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useProductStore } from "@/store/products/useProductStore";
+import Image from "next/image";
+import type { ProductStore } from "@/store/products/useProductStore";
 
 interface ProductItemProps {
   info: ProductInfo;
@@ -31,11 +29,10 @@ export const ProductItem: React.FC<ProductItemProps> = ({
   certificate,
   mini,
 }) => {
-  const reviews = useProductStore((state) => state.reviews);
+  const reviews = useProductStore((state: ProductStore) => state.reviews);
   const currentReviews = reviews.filter(
-    (item: { product_id: any }) => item.product_id == info.id
+    (item: { product_id: number }) => item.product_id == info.id
   );
-  const [isPopupOpen, setPopupOpen] = useState(false);
   const { width } = useWindowSize();
   const isMobile = width < 1024;
   const brandName = info.brands[0]?.name || "";
@@ -61,7 +58,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({
             <div className={s.markersBlock}>
               {info.featured && (
                 <div className={s.bestMarker}>
-                  <span>bilobrov'S</span>
+                  <span>bilobrov&apos;S</span>
                   <span>BEST</span>
                 </div>
               )}
@@ -84,10 +81,28 @@ export const ProductItem: React.FC<ProductItemProps> = ({
                   </div>
                 )}
             </div>
-            <img
-              src={info.images[0]?.src}
-              alt={info.images[0]?.alt || info.name}
-            />
+            {info.images && info.images.length > 0 && info.images[0]?.src ? (
+              <Image
+                src={info.images[0].src}
+                alt={info.images[0]?.alt || info.name}
+                width={100}
+                height={100}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: "#f5f5f5",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#999",
+                }}
+              >
+                No Image
+              </div>
+            )}
             <WishlistButton productId={info.id} />
             <div className={`${s.cart}`} title="Додати в корзину">
               <svg

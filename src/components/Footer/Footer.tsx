@@ -1,7 +1,6 @@
+// потрібно
 "use client";
 
-import React from "react";
-import Image from "next/image";
 import { FooterInstList } from "../FooterInstList/FooterInstList";
 import { FooterNavigationBlock } from "../FooterNavigationBlock/FooterNavigationBlock";
 import { Layout } from "../Layout/Layout";
@@ -12,6 +11,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { MailingFormBlock } from "../MailingFormBlock/MailingFormBlock";
+import Image from "next/image";
 
 // import { MailingFormBlock } from "../MailingFormBlock copy/MailingFormBlock";
 
@@ -36,8 +36,8 @@ export const Footer = () => {
             <Image
               src="/icons/footer-logo.svg"
               alt="Logo"
-              width={290}
-              height={42}
+              width={120}
+              height={40}
             />
             <div>
               <span>@bilobrov_cosmetics</span>

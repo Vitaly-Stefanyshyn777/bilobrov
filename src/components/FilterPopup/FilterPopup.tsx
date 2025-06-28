@@ -9,6 +9,7 @@ import { useProductFilterStore } from "@/store/filter/useProductFilterStore";
 import { usePathname } from "next/navigation";
 import type { Brand } from "@/types/productTypes";
 import type { CategoryShort } from "@/types/categoryShortType";
+import React, { Suspense } from "react";
 
 export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const {
@@ -19,13 +20,6 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     selectedCategories,
     selectedBrands,
     selectedAttributes,
-    setMinPrice,
-    setMaxPrice,
-    setOnSale,
-    setInStock,
-    setSelectedCategories,
-    setSelectedBrands,
-    setSelectedAttributes,
     attributes,
     allCategories,
     allBrands,
@@ -52,6 +46,8 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     useState<string[]>(selectedCategories);
   const [localSelectedBrands, setLocalSelectedBrands] =
     useState<string[]>(selectedBrands);
+  const [localOnSale, setLocalOnSale] = useState(onSale);
+  const [localInStock, setLocalInStock] = useState(inStock);
 
   const [brandsIsOpen, setBrandsIsOpen] = useState(false);
   const [categoryIsOpen, setCategoryIsOpen] = useState(false);
@@ -62,12 +58,16 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setLocalSelectedCategories(selectedCategories);
     setLocalSelectedBrands(selectedBrands);
     setLocalSelectedAttributes(selectedAttributes);
+    setLocalOnSale(onSale);
+    setLocalInStock(inStock);
   }, [
     minPrice,
     maxPrice,
     selectedCategories,
     selectedBrands,
     selectedAttributes,
+    onSale,
+    inStock,
   ]);
 
   useEffect(() => {
@@ -80,8 +80,7 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       }
     });
     setLocalSelectedAttributes(attributesFromURL);
-    setSelectedAttributes(attributesFromURL);
-  }, [searchParams, setSelectedAttributes]);
+  }, [searchParams]);
 
   const { t } = useTranslation();
 
@@ -117,18 +116,12 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   const applyFilters = () => {
-    setMinPrice(localMinPrice);
-    setMaxPrice(localMaxPrice);
-    setSelectedCategories(localSelectedCategories);
-    setSelectedBrands(localSelectedBrands);
-    setSelectedAttributes(localSelectedAttributes);
-
     // 👉 Створюємо новий URL
     const query = new URLSearchParams(searchParams.toString());
     query.set("min", localMinPrice.toString());
     query.set("max", localMaxPrice.toString());
-    query.set("sale", onSale.toString());
-    query.set("stock", inStock.toString());
+    query.set("sale", localOnSale.toString());
+    query.set("stock", localInStock.toString());
 
     if (localSelectedCategories.length) {
       query.set("categories", localSelectedCategories.join(","));
@@ -227,8 +220,8 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               <input
                 className={s.switch}
                 type="checkbox"
-                checked={onSale}
-                onChange={() => setOnSale(!onSale)}
+                checked={localOnSale}
+                onChange={() => setLocalOnSale(!localOnSale)}
               />
             </label>
 
@@ -238,8 +231,8 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               <input
                 className={s.switch}
                 type="checkbox"
-                checked={inStock}
-                onChange={() => setInStock(!inStock)}
+                checked={localInStock}
+                onChange={() => setLocalInStock(!localInStock)}
               />
             </label>
           </div>
@@ -595,3 +588,11 @@ export const Filters: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     document.body
   );
 };
+
+export const FiltersWithSuspense: React.FC<{ onClose: () => void }> = (
+  props
+) => (
+  <Suspense fallback={null}>
+    <Filters {...props} />
+  </Suspense>
+);

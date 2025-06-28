@@ -1,12 +1,16 @@
 // import CatalogPage from "@/components/CatalogPage/CatalogPage";
 
 import CatalogPage from "../page";
+import React, { Suspense } from "react";
 
 // import CatalogPage from "@/components/CatalogPage";
 export default function CatalogRoot() {
-  return <CatalogPage />;
+  return (
+    <Suspense fallback={null}>
+      <CatalogPage />
+    </Suspense>
+  );
 }
-
 // "use client";
 // import React, { useEffect, useMemo, useRef, useState } from "react";
 // import { useSelector } from "react-redux";
@@ -197,10 +201,10 @@ export default function CatalogRoot() {
 //     if (slug === "news") {
 //       if (!sortFromQuery) {
 //         dispatch(setSort("date"));
-//       } else if (validSortValues.includes(sortFromQuery as any)) {
+//       } else if (validSortValues.includes(sortFromQuery)) {
 //         dispatch(setSort(sortFromQuery as (typeof validSortValues)[number]));
 //       }
-//     } else if (validSortValues.includes(sortFromQuery as any)) {
+//     } else if (validSortValues.includes(sortFromQuery)) {
 //       dispatch(setSort(sortFromQuery as (typeof validSortValues)[number]));
 //     } else {
 //       dispatch(setSort("popularity"));

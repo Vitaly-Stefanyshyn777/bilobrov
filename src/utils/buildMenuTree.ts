@@ -1,4 +1,4 @@
-import { MenuItem } from "../store/slices/menuSlice";
+import { MenuItem } from "../store/menu/useMenuStore";
 
 export const buildMenuTree = (menuItems: MenuItem[]) => {
   const menuMap: { [key: string]: MenuItem & { children: MenuItem[] } } = {};

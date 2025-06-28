@@ -49,37 +49,27 @@ import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
 import { ProductItem } from "../ProductItem/ProductItem";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useCartProductsQuery } from "@/queries/useAllProductsQuery";
 import { Loader } from "../Loader/Loader";
 import "./WishList.css";
 import { useWishlistStore } from "@/store/wishlist/useWishlistState";
+import type { ProductInfo } from "@/types/productTypes";
+import type { WishlistState } from "@/store/wishlist/useWishlistState";
 
 const WishListPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-  const pathname = usePathname();
   const { width } = useWindowSize();
   const isMobile = width < 1024;
   const { t } = useTranslation();
-  const wishlist = useWishlistStore((state) => state.preferences);
-  const clearWishlist = useWishlistStore((state) => state.clearWishlist);
-  const productIdsString = wishlist
-    .slice()
-    .sort((a, b) => a - b)
-    .join(",");
+  const wishlist = useWishlistStore(
+    (state: WishlistState) => state.preferences
+  );
+  const clearWishlist = useWishlistStore(
+    (state: WishlistState) => state.clearWishlist
+  );
 
   const { data: cartProducts = [], isLoading: loading } =
     useCartProductsQuery(wishlist);
-
-  useEffect(() => {
-    if (hasMounted) {
-      onClose();
-    } else {
-      setHasMounted(true);
-    }
-  }, [pathname]);
 
   const handleClearWishlist = () => {
     clearWishlist();
@@ -206,7 +196,7 @@ const WishListPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <>
             {isMobile ? (
               <div className={s.mobileList}>
-                {cartProducts.map((product) => (
+                {cartProducts.map((product: ProductInfo) => (
                   <ProductItem info={product} key={product.id} />
                 ))}
               </div>
@@ -221,7 +211,7 @@ const WishListPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 }}
                 className="productListSwiper"
               >
-                {cartProducts.map((product) => (
+                {cartProducts.map((product: ProductInfo) => (
                   <SwiperSlide className={s.slide} key={product.id}>
                     <ProductItem info={product} />
                   </SwiperSlide>

@@ -1,7 +1,5 @@
-"use client";
+import CatalogPage from "../../../page";
 
-import CatalogPage from "@/app/page";
-
-export default function ParentCatalogPage() {
+export default function CatalogSlugPage() {
   return <CatalogPage />;
 }

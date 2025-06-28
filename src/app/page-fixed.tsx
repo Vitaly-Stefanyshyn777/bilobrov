@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useMemo, useRef, useState, Suspense } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useProductsQuery } from "@/queries/useCatalogProductsQuery";
 import { useAttributesQuery } from "@/queries/useAttributesQuery";
 import { useBrandsQuery } from "@/queries/useBrandsQuery";
@@ -23,19 +23,18 @@ import {
 } from "next/navigation";
 import { useProductFilterStore } from "@/store/filter/useProductFilterStore";
 import { ProductItem } from "@/components/ProductItem/ProductItem";
-import { FiltersWithSuspense } from "@/components/FilterPopup/FilterPopup";
+import { Filters } from "@/components/FilterPopup/FilterPopup";
 import { Layout } from "@/components/Layout/Layout";
 import { CustomSortDropdown } from "@/components/DropDown/DropDown";
 import { CategoryShort } from "@/types/categoryShortType";
 import { Pagination } from "@/components/Pagination/Pagination";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { Loader } from "@/components/Loader/Loader";
 import { usePageData } from "@/hooks/usePageData";
 import { API_URL } from "@/constants/api";
 import type { ProductInfo } from "@/types/productTypes";
 import { useCatalogQueryParams } from "@/hooks/useCatalogQueryParams";
 
-function CatalogPageInner() {
+export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -43,15 +42,16 @@ function CatalogPageInner() {
   const productsRef = useRef<HTMLUListElement | null>(null);
   const { t } = useTranslation();
 
+  // Використовуємо хук для роботи з query параметрами
   const {
     minPrice: urlMinPrice,
     maxPrice: urlMaxPrice,
-    onSale: urlOnSale,
-    inStock: urlInStock,
+    sort: urlSort,
     selectedCategories: urlCategories,
     selectedBrands: urlBrands,
     selectedAttributes: urlAttributes,
-    sort: urlSort,
+    onSale: urlOnSale,
+    inStock: urlInStock,
     page: urlPage,
   } = useCatalogQueryParams();
 
@@ -91,10 +91,6 @@ function CatalogPageInner() {
     return Array.isArray(brandData) ? brandData : brandData?.items || [];
   }, [brandData]);
 
-  const { width } = useWindowSize();
-
-  const isMobile = width < 1024;
-
   const { slug, parentSlug, childSlug } = useParams<{
     slug?: string;
     parentSlug?: string;
@@ -131,8 +127,6 @@ function CatalogPageInner() {
   }, [parentCategory, allCategories]);
 
   const onTabClick = (categoryId: number, categorySlug: string) => {
-    console.log("🎯 onTabClick called with:", { categoryId, categorySlug });
-
     const clickedCategory = allCategories.find(
       (cat: CategoryShort) => cat.id === categoryId
     );
@@ -150,55 +144,27 @@ function CatalogPageInner() {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set("categories", categoryId.toString());
 
-    const newUrl = `${fullSlugPath}?${currentParams.toString()}`;
-    console.log("🔄 Navigating to:", newUrl);
-
-    router.push(newUrl);
+    router.push(`${fullSlugPath}?${currentParams.toString()}`);
   };
 
+  // Синхронізуємо стан з URL параметрами
   useEffect(() => {
-    console.log("🔄 Syncing state with URL params:");
-    console.log("URL onSale:", urlOnSale, "State onSale:", onSale);
-    console.log("URL inStock:", urlInStock, "State inStock:", inStock);
-    console.log("URL categories:", urlCategories);
-    console.log("State categories:", selectedCategories);
-
-    if (minPrice !== urlMinPrice) {
-      console.log("Setting minPrice:", urlMinPrice);
-      setMinPrice(urlMinPrice);
-    }
-    if (maxPrice !== urlMaxPrice) {
-      console.log("Setting maxPrice:", urlMaxPrice);
-      setMaxPrice(urlMaxPrice);
-    }
-    if (onSale !== urlOnSale) {
-      console.log("Setting onSale:", urlOnSale);
-      setOnSale(urlOnSale);
-    }
-    if (inStock !== urlInStock) {
-      console.log("Setting inStock:", urlInStock);
-      setInStock(urlInStock);
-    }
-    if (sort !== urlSort) {
-      console.log("Setting sort:", urlSort);
-      setSort(urlSort);
-    }
-    if (page !== urlPage) {
-      console.log("Setting page:", urlPage);
-      setPage(urlPage);
-    }
+    if (minPrice !== urlMinPrice) setMinPrice(urlMinPrice);
+    if (maxPrice !== urlMaxPrice) setMaxPrice(urlMaxPrice);
+    if (onSale !== urlOnSale) setOnSale(urlOnSale);
+    if (inStock !== urlInStock) setInStock(urlInStock);
+    if (sort !== urlSort) setSort(urlSort);
+    if (page !== urlPage) setPage(urlPage);
     if (
       selectedCategories.length !== urlCategories.length ||
       !selectedCategories.every((v, i) => v === urlCategories[i])
     ) {
-      console.log("Setting selectedCategories:", urlCategories);
       setSelectedCategories(urlCategories);
     }
     if (
       selectedBrands.length !== urlBrands.length ||
       !selectedBrands.every((v, i) => v === urlBrands[i])
     ) {
-      console.log("Setting selectedBrands:", urlBrands);
       setSelectedBrands(urlBrands);
     }
     const attrKeys = Object.keys(urlAttributes);
@@ -212,7 +178,6 @@ function CatalogPageInner() {
           !urlAttributes[key].every((v, i) => selectedAttributes[key][i] === v)
       );
     if (attributesChanged) {
-      console.log("Setting selectedAttributes:", urlAttributes);
       setSelectedAttributes(urlAttributes);
     }
   }, [
@@ -225,6 +190,15 @@ function CatalogPageInner() {
     urlCategories,
     urlBrands,
     urlAttributes,
+    minPrice,
+    maxPrice,
+    onSale,
+    inStock,
+    sort,
+    page,
+    selectedCategories,
+    selectedBrands,
+    selectedAttributes,
     setMinPrice,
     setMaxPrice,
     setOnSale,
@@ -238,12 +212,14 @@ function CatalogPageInner() {
 
   useAttributesQuery();
 
+  // Ініціалізація категорій з URL slug (тільки якщо немає categories в URL)
   useEffect(() => {
     if (allCategories.length === 0) return;
 
     const categoriesFromQuery = searchParams.get("categories");
     const slugs = [childSlug || parentSlug || slug].filter(Boolean);
 
+    // Якщо немає categories в URL, але є slug - встановлюємо категорію з slug
     if (!categoriesFromQuery && slugs.length > 0) {
       const matchedCategories = slugs
         .map((s: string | undefined) =>
@@ -261,6 +237,7 @@ function CatalogPageInner() {
     }
   }, [slug, parentSlug, childSlug, allCategories, searchParams.toString()]);
 
+  // Спеціальна логіка для sales та news
   useEffect(() => {
     if (slug === "sales") {
       setOnSale(true);
@@ -417,173 +394,102 @@ function CatalogPageInner() {
     if (attributesData) setAttributes(attributesData);
   }, [attributesData, setAttributes]);
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.set("page", newPage.toString());
+    router.push(`${pathname}?${currentParams.toString()}`);
+  };
+
   return (
-    <main className={s.page}>
+    <>
       <Head>
-        <title>{seoData.title || "Bilobrov"}</title>
-        <link rel="canonical" href={seoData.canonical || pathname} />
-
-        {seoData.og_title && (
-          <meta property="og:title" content={seoData.og_title} />
-        )}
-        {seoData.og_description && (
-          <meta property="og:description" content={seoData.og_description} />
-        )}
-        {seoData.og_url && <meta property="og:url" content={seoData.og_url} />}
-        {seoData.og_locale && (
-          <meta property="og:locale" content={seoData.og_locale} />
-        )}
-        {seoData.og_type && (
-          <meta property="og:type" content={seoData.og_type} />
-        )}
-        {seoData.og_site_name && (
-          <meta property="og:site_name" content={seoData.og_site_name} />
-        )}
-        {seoData.twitter_card && (
-          <meta name="twitter:card" content={seoData.twitter_card} />
-        )}
-
+        <title>{pageTitle}</title>
+        <meta name="description" content={seoData?.og_description || ""} />
+        <meta property="og:title" content={pageTitle} />
         <meta
-          name="robots"
-          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          property="og:description"
+          content={seoData?.og_description || ""}
         />
+        <meta property="og:url" content={metaUrl} />
+        <link rel="canonical" href={metaUrl} />
       </Head>
 
       <Layout>
-        <Breadcrumbs aria-label="breadcrumb" className="breadcrumbs">
-          {breadcrumbs.map((breadcrumb, index) => (
-            <Link key={index} href={breadcrumb.link}>
-              {breadcrumb.name}
-            </Link>
-          ))}
-        </Breadcrumbs>
-      </Layout>
-
-      <Layout>
-        <AnimatePresence>
-          {isFilterOpen && (
-            <FiltersWithSuspense onClose={() => setIsFilterOpen(false)} />
-          )}
-        </AnimatePresence>
-
-        <div className={s.categoryHeader}>
-          <h1>{pageTitle}</h1>
-
-          <span>
-            {totalCount} {t("catalog.productsLength")}
-          </span>
-        </div>
-      </Layout>
-      {selectedCategories.length === 1 &&
-        childCategories.length > 0 &&
-        isMobile && (
-          <div className={s.childCategories}>
-            <ul className={s.scroller}>
-              {childCategories.map((cat: CategoryShort) => (
-                <li
-                  key={cat.id}
-                  className={
-                    selectedCategories.includes(cat.id.toString())
-                      ? s.active
-                      : ""
-                  }
-                  onClick={() => onTabClick(cat.id, cat.slug)}
-                >
-                  {cat.name}
-                </li>
+        <div className={s.container}>
+          <div className={s.breadcrumbsContainer}>
+            <Breadcrumbs aria-label="breadcrumb">
+              {breadcrumbs.map((item, index) => (
+                <Link key={index} href={item.link} className={s.breadcrumbLink}>
+                  {item.name}
+                </Link>
               ))}
-            </ul>
+            </Breadcrumbs>
           </div>
-        )}
 
-      {childCategories.length > 0 && isMobile && (
-        <Layout>
-          <div className={s.scroller}>
-            <div className={s.scrollbarContainer}>
-              <div className={s.scrollbar}></div>і
+          <div className={s.header}>
+            <h1 className={s.title}>{pageTitle}</h1>
+            <div className={s.controls}>
+              <button
+                onClick={() => setIsFilterOpen(true)}
+                className={s.filterButton}
+              >
+                {t("catalog.filter")}
+              </button>
+              <CustomSortDropdown sort={sort} />
             </div>
           </div>
-        </Layout>
-      )}
 
-      <Layout>
-        {selectedCategories.length === 1 &&
-          childCategories.length > 0 &&
-          !isMobile && (
-            <div className={s.childCategories}>
-              <ul>
-                {childCategories.map((cat: CategoryShort) => (
-                  <li
-                    key={cat.id}
-                    className={
-                      selectedCategories.includes(cat.id.toString())
-                        ? s.active
-                        : ""
-                    }
-                    onClick={() => onTabClick(cat.id, cat.slug)}
-                  >
-                    {cat.name}
-                  </li>
-                ))}
+          {parentCategory && childCategories.length > 0 && (
+            <div className={s.categoriesContainer}>
+              <div className={s.scroller}>
+                <div className={s.categoriesList}>
+                  {childCategories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => onTabClick(category.id, category.slug)}
+                      className={`${s.categoryTab} ${
+                        selectedCategories.includes(category.id.toString())
+                          ? s.active
+                          : ""
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
+                <div className={s.scrollbar}></div>
+              </div>
+            </div>
+          )}
+
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <ul ref={productsRef} className={s.productsList}>
+                <AnimatePresence>
+                  {products.map((product) => (
+                    <ProductItem key={product.id} info={product} />
+                  ))}
+                </AnimatePresence>
               </ul>
-            </div>
+
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={page}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              )}
+            </>
           )}
 
-        <div className={s.filterController}>
-          <button onClick={() => setIsFilterOpen(true)}>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 12H18M3 6H21M9 18H15"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            {t("catalog.filters")}
-          </button>
-          <div className={s.sort}>
-            <CustomSortDropdown sort={sort} />
-          </div>
+          <AnimatePresence>
+            {isFilterOpen && <Filters onClose={() => setIsFilterOpen(false)} />}
+          </AnimatePresence>
         </div>
-
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <ul ref={productsRef} className={s.list}>
-            {products
-              .filter((product) => product && product.slug && product.id)
-              .map((product) => (
-                <ProductItem key={product.id} info={product} />
-              ))}
-          </ul>
-        )}
-
-        {!isLoading && totalCount > 20 && (
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={(newPage: number) => {
-              setPage(newPage);
-              const catalogTop = document.querySelector(`body`);
-              catalogTop?.scrollIntoView({
-                block: "start",
-              });
-            }}
-          />
-        )}
       </Layout>
-    </main>
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <CatalogPageInner />
-    </Suspense>
+    </>
   );
 }

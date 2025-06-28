@@ -5,10 +5,12 @@ import { StarRatingRed } from "../StarRating/StarRating";
 import { useCartStore } from "../../store/useCartStore";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
+import { useFormik } from "formik";
 import Link from "next/link";
-import { ProductPageAccordion } from "../ProductPageAccordion/ProductPageAccordion";
 import { useProductStore } from "@/store/products/useProductStore";
 import { useWishlistStore } from "@/store/wishlist/useWishlistState";
+import Image from "next/image";
+import { StylesConfig } from "react-select";
 
 interface VariationAttribute {
   id: number;
@@ -32,6 +34,13 @@ interface ProductItemProps {
   variations: Variation[];
   reviewsQty: number;
 }
+
+type OptionType = {
+  value: string;
+  label: string | React.ReactElement;
+  image?: string;
+  isDisabled?: boolean;
+};
 
 export const ProductContent: React.FC<ProductItemProps> = ({
   info,
@@ -61,7 +70,6 @@ export const ProductContent: React.FC<ProductItemProps> = ({
     openCart();
     setQuantity(1);
   };
-  const preferences = useWishlistStore((s) => s.preferences);
   const reviews = useProductStore((state) => state.reviews);
   const certificates = [] as { id: number; price: string; slug: string }[];
   const currentReviews = reviews.filter(
@@ -91,26 +99,28 @@ export const ProductContent: React.FC<ProductItemProps> = ({
   const [selectedAttributes, setSelectedAttributes] = useState<{
     [key: string]: string | null;
   }>({});
-  const { data: productVariations, isLoading: isVariationsLoading } =
-    useProductStore((state) => state.productVariations);
+
   useEffect(() => {
-    if (productVariations && productVariations.length > 0) {
-      const firstVariation = productVariations[0];
+    if (variations && variations.length > 0) {
+      const firstVariation = variations[0];
       const initialAttributes: { [key: string]: string } = {};
-      firstVariation.attributes.forEach((attr) => {
-        initialAttributes[attr.slug] = attr.option;
-      });
+      firstVariation.attributes.forEach(
+        (attr: { slug: string; option: string }) => {
+          initialAttributes[attr.slug] = attr.option;
+        }
+      );
       setSelectedAttributes(initialAttributes);
       setSelectedVariation(firstVariation.id);
     }
-  }, [productVariations, info.id]);
+  }, [variations, info.id]);
   useEffect(() => {
-    if (!productVariations) return;
+    if (!variations) return;
     if (Object.keys(selectedAttributes).length > 0) {
-      const matchedVariation = productVariations.find((v) =>
+      const matchedVariation = variations.find((v: Variation) =>
         Object.entries(selectedAttributes).every(([key, value]) =>
           v.attributes.some(
-            (attr) => attr.slug === key && attr.option === value
+            (attr: { slug: string; option: string }) =>
+              attr.slug === key && attr.option === value
           )
         )
       );
@@ -127,7 +137,7 @@ export const ProductContent: React.FC<ProductItemProps> = ({
         }
       }
     }
-  }, [selectedAttributes, productVariations, info.id, selectedVariation]);
+  }, [selectedAttributes, variations, info.id, selectedVariation]);
   const handleAuth = () => {
     openRegister();
   };
@@ -136,33 +146,12 @@ export const ProductContent: React.FC<ProductItemProps> = ({
     toggleWishlistItem(info.id);
   };
   const brandName = info.brands[0]?.name || "";
-  const components = (info.meta_data.find(
-    (item) => item.key === "_product_composition" && item.value
-  )?.value ?? "") as string;
-  const appointment = (info.attributes.find(
-    (item) => item.name === "Призначення" && item.options
-  )?.options ?? "") as [];
-  const skinType = (info.attributes.find(
-    (item) => item.name === "Тип шкіри" && item.options
-  )?.options ?? "") as [];
-  const contraindication = (info.attributes.find(
-    (item) => item.name === "Протипоказання" && item.options
-  )?.options ?? "") as [];
-  const ingredients = (info.attributes.find(
-    (item) => item.name === "Активні інгрідієнти" && item.options
-  )?.options ?? "") as [];
-
-  const characteristics = {
-    appointment,
-    skinType,
-    contraindication,
-  };
 
   const isGiftCertificate = info?.categories?.some(
     (cat) => cat.slug === "podarunkovi-sertyfikaty-20"
   );
 
-  const customStyles: StylesConfig<any, false> = {
+  const customStyles: StylesConfig<OptionType, false> = {
     control: (provided, state) => ({
       ...provided,
       backgroundColor: "white",
@@ -202,6 +191,23 @@ export const ProductContent: React.FC<ProductItemProps> = ({
       display: "none", // Прибирає лінію між текстом і стрілкою
     }),
   };
+
+  const formik = useFormik({
+    initialValues: {
+      giftFrom: "",
+      giftTo: "",
+      giftEmail: "",
+      giftMessage: "",
+    },
+    validateOnBlur: true,
+    validateOnChange: false,
+
+    onSubmit: () => {
+      if (!info) return;
+
+      openCart();
+    },
+  });
 
   if (!info.attributes || !certificates) return <p>Loading...</p>;
 
@@ -259,13 +265,14 @@ export const ProductContent: React.FC<ProductItemProps> = ({
               return matchesSelected && hasOption;
             });
 
-            const optionImage = variations
-              .filter((v) =>
-                v.attributes.some(
-                  (a) => a.slug === attribute.slug && a.option === option
+            const optionImage =
+              variations
+                .filter((v) =>
+                  v.attributes.some(
+                    (a) => a.slug === attribute.slug && a.option === option
+                  )
                 )
-              )
-              .map((v) => v.image?.src)[0];
+                .map((v) => v.image?.src)[0] || "";
 
             return {
               value: option,
@@ -287,9 +294,11 @@ export const ProductContent: React.FC<ProductItemProps> = ({
                       label: (
                         <div className="flex items-center">
                           {opt.image && (
-                            <img
+                            <Image
                               src={opt.image}
-                              alt={opt.label}
+                              alt={opt.label.toString()}
+                              width={24}
+                              height={24}
                               className="w-6 h-6 mr-2"
                             />
                           )}
@@ -302,6 +311,7 @@ export const ProductContent: React.FC<ProductItemProps> = ({
                       (opt) => opt.value === selectedAttributes[attribute.slug]
                     )}
                     onChange={(option) =>
+                      option &&
                       setSelectedAttributes((prev) => ({
                         ...prev,
                         [attribute.slug]: option.value,
@@ -473,48 +483,42 @@ export const ProductContent: React.FC<ProductItemProps> = ({
         )}
       </div>
 
-      {!user && (
-        <div onClick={handleAuth} className={s.auth}>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="0.85"
-              y="3.85"
-              width="22.3"
-              height="15.3"
-              rx="2.15"
-              strokeWidth="1.7"
-            />
-            <path d="M4 10H1" strokeWidth="1.7" />
-            <path d="M23 10L15 10" strokeWidth="1.7" />
-            <path
-              d="M10 11.5688C10.5 9.0688 12.5 5.07275 15 8.06882C17.3101 10.8373 13 12.0688 10 11.5688Z"
-              strokeWidth="1.7"
-            />
-            <path
-              d="M9.65527 11.5688C9.15527 9.0688 7.15527 5.07275 4.65527 8.06882C2.34516 10.8373 6.65527 12.0688 9.65527 11.5688Z"
-              strokeWidth="1.7"
-            />
-            <path
-              d="M10 12L13.5355 15.5355"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-            />
-            <path
-              d="M9.53516 12L5.99962 15.5355"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-            />
-            <path d="M10 4V19" strokeWidth="1.7" />
-          </svg>
+      <div onClick={handleAuth} className={s.auth}>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect
+            x="0.85"
+            y="3.85"
+            width="22.3"
+            height="15.3"
+            rx="2.15"
+            strokeWidth="1.7"
+          />
+          <path d="M4 10H1" strokeWidth="1.7" />
+          <path d="M23 10L15 10" strokeWidth="1.7" />
+          <path
+            d="M10 11.5688C10.5 9.0688 12.5 5.07275 15 8.06882C17.3101 10.8373 13 12.0688 10 11.5688Z"
+            strokeWidth="1.7"
+          />
+          <path
+            d="M9.65527 11.5688C9.15527 9.0688 7.15527 5.07275 4.65527 8.06882C2.34516 10.8373 6.65527 12.0688 9.65527 11.5688Z"
+            strokeWidth="1.7"
+          />
+          <path
+            d="M10 12L13.5355 15.5355"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+          />
+          <path
+            d="M9.53516 12L5.99962 15.5355"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+          />
+          <path d="M10 4V19" strokeWidth="1.7" />
+        </svg>
 
-          <span>{t("authorize")}</span>
-          <p>{t("getBonuses")}</p>
-        </div>
-      )}
+        <span>{t("authorize")}</span>
+        <p>{t("getBonuses")}</p>
+      </div>
 
       {info.stock_quantity > 0 && (
         <div className={s.orderController}>
@@ -694,14 +698,6 @@ export const ProductContent: React.FC<ProductItemProps> = ({
           <span>{t("getConsultation")}</span>
         </div>
       </div>
-
-      <ProductPageAccordion
-        conditions={isGiftCertificate}
-        desc={info.description}
-        components={components}
-        ingredients={ingredients}
-        characteristics={characteristics}
-      />
     </div>
   );
 };

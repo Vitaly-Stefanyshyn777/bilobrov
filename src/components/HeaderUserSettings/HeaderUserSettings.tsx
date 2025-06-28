@@ -3,17 +3,15 @@ import s from "./HeaderUserSettings.module.css";
 import { useEffect, useState } from "react";
 import { useWishlistStore } from "@/store/wishlist/useWishlistState";
 
-interface HeaderProps {
+interface HeaderUserSettingsProps {
   openRegister: React.Dispatch<React.SetStateAction<boolean>>;
-  openWishList: React.Dispatch<React.SetStateAction<boolean>>;
-  openCart: React.Dispatch<React.SetStateAction<boolean>>;
+  openWishList: () => void;
   isMobile: boolean;
 }
 
-export const HeaderUserSettings: React.FC<HeaderProps> = ({
+export const HeaderUserSettings: React.FC<HeaderUserSettingsProps> = ({
   openRegister,
   openWishList,
-  openCart,
   isMobile,
 }) => {
   const [mounted, setMounted] = useState(false);
@@ -46,7 +44,7 @@ export const HeaderUserSettings: React.FC<HeaderProps> = ({
 
       <button
         className={!wishlist.length ? s.disabled : ""}
-        onClick={() => openWishList(true)}
+        onClick={() => openWishList()}
       >
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

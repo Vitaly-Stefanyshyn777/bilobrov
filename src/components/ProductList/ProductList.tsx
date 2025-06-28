@@ -43,7 +43,7 @@
 //   const prevButtonRef = useRef<HTMLDivElement | null>(null);
 //   const nextButtonRef = useRef<HTMLDivElement | null>(null);
 
-//   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+//   const [swiperInstance, setSwiperInstance] = useState<Swiper | null>(null);
 //   const [activeIndex, setActiveIndex] = useState(0);
 
 //   useEffect(() => {

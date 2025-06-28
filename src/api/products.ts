@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProductInfo } from "../types/productTypes";
+import { ProductInfo, ProductReview } from "../types/productTypes";
 import {
   API_URL_WC,
   API_URL_WP,
@@ -68,8 +68,8 @@ export const fetchVariationById = async ({
   return data;
 };
 
-export const fetchReviews = async (): Promise<unknown[]> => {
-  const { data } = await wcClient.get<unknown[]>("/products/reviews", {
+export const fetchReviews = async (): Promise<ProductReview[]> => {
+  const { data } = await wcClient.get<ProductReview[]>("/products/reviews", {
     params: { per_page: 100 },
   });
   return data;
