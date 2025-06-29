@@ -1,7 +1,5 @@
-// import CatalogPage from "@/components/CatalogPage/CatalogPage";
-
-import CatalogPage from "@/app/page";
+import CatalogPageInner from "@/components/CatalogPageInner/CatalogPageInner";
 
 export default function CatalogNestedPage() {
-  return <CatalogPage />;
+  return <CatalogPageInner />;
 }

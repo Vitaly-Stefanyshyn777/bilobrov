@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_URL_WC, consumerKey, consumerSecret } from "@/constants/api";
 
-import s from "./CatalogPage.module.css";
+import s from "./CatalogPageInner.module.css";
 
 import { Breadcrumbs } from "@mui/material";
 import { AnimatePresence } from "framer-motion";
@@ -21,10 +21,7 @@ import {
   useSearchParams,
   useParams,
 } from "next/navigation";
-import {
-  useProductFilterStore,
-  SortOption,
-} from "@/store/filter/useProductFilterStore";
+import { useProductFilterStore } from "@/store/filter/useProductFilterStore";
 import { ProductItem } from "@/components/ProductItem/ProductItem";
 import { FiltersWithSuspense } from "@/components/FilterPopup/FilterPopup";
 import { Layout } from "@/components/Layout/Layout";
@@ -38,7 +35,7 @@ import { API_URL } from "@/constants/api";
 import type { ProductInfo } from "@/types/productTypes";
 import { useCatalogQueryParams } from "@/hooks/useCatalogQueryParams";
 
-export const CatalogPage: React.FC = () => {
+function CatalogPageInner() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,12 +46,12 @@ export const CatalogPage: React.FC = () => {
   const {
     minPrice: urlMinPrice,
     maxPrice: urlMaxPrice,
-    sort: urlSort,
+    onSale: urlOnSale,
+    inStock: urlInStock,
     selectedCategories: urlCategories,
     selectedBrands: urlBrands,
     selectedAttributes: urlAttributes,
-    onSale: urlOnSale,
-    inStock: urlInStock,
+    sort: urlSort,
     page: urlPage,
   } = useCatalogQueryParams();
 
@@ -134,6 +131,8 @@ export const CatalogPage: React.FC = () => {
   }, [parentCategory, allCategories]);
 
   const onTabClick = (categoryId: number, categorySlug: string) => {
+    console.log("🎯 onTabClick called with:", { categoryId, categorySlug });
+
     const clickedCategory = allCategories.find(
       (cat: CategoryShort) => cat.id === categoryId
     );
@@ -151,41 +150,69 @@ export const CatalogPage: React.FC = () => {
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set("categories", categoryId.toString());
 
-    router.push(`${fullSlugPath}?${currentParams.toString()}`);
+    const newUrl = `${fullSlugPath}?${currentParams.toString()}`;
+    console.log("🔄 Navigating to:", newUrl);
+
+    router.push(newUrl);
   };
 
   useEffect(() => {
-    if (minPrice !== urlMinPrice) setMinPrice(urlMinPrice);
-    if (maxPrice !== urlMaxPrice) setMaxPrice(urlMaxPrice);
-    if (onSale !== urlOnSale) setOnSale(urlOnSale);
-    if (inStock !== urlInStock) setInStock(urlInStock);
-    if (page !== urlPage) setPage(urlPage);
-    if (sort !== urlSort) setSort(urlSort);
+    console.log("🔄 Syncing state with URL params:");
+    console.log("URL onSale:", urlOnSale, "State onSale:", onSale);
+    console.log("URL inStock:", urlInStock, "State inStock:", inStock);
+    console.log("URL categories:", urlCategories);
+    console.log("State categories:", selectedCategories);
 
+    if (minPrice !== urlMinPrice) {
+      console.log("Setting minPrice:", urlMinPrice);
+      setMinPrice(urlMinPrice);
+    }
+    if (maxPrice !== urlMaxPrice) {
+      console.log("Setting maxPrice:", urlMaxPrice);
+      setMaxPrice(urlMaxPrice);
+    }
+    if (onSale !== urlOnSale) {
+      console.log("Setting onSale:", urlOnSale);
+      setOnSale(urlOnSale);
+    }
+    if (inStock !== urlInStock) {
+      console.log("Setting inStock:", urlInStock);
+      setInStock(urlInStock);
+    }
+    if (sort !== urlSort) {
+      console.log("Setting sort:", urlSort);
+      setSort(urlSort);
+    }
+    if (page !== urlPage) {
+      console.log("Setting page:", urlPage);
+      setPage(urlPage);
+    }
     if (
       selectedCategories.length !== urlCategories.length ||
-      !selectedCategories.every((val, idx) => val === urlCategories[idx])
+      !selectedCategories.every((v, i) => v === urlCategories[i])
     ) {
+      console.log("Setting selectedCategories:", urlCategories);
       setSelectedCategories(urlCategories);
     }
-
     if (
       selectedBrands.length !== urlBrands.length ||
-      !selectedBrands.every((val, idx) => val === urlBrands[idx])
+      !selectedBrands.every((v, i) => v === urlBrands[i])
     ) {
+      console.log("Setting selectedBrands:", urlBrands);
       setSelectedBrands(urlBrands);
     }
-
-    if (
-      Object.keys(selectedAttributes).length !==
-        Object.keys(urlAttributes).length ||
-      Object.entries(urlAttributes).some(
-        ([key, arr]) =>
+    const attrKeys = Object.keys(urlAttributes);
+    const stateAttrKeys = Object.keys(selectedAttributes);
+    const attributesChanged =
+      attrKeys.length !== stateAttrKeys.length ||
+      attrKeys.some(
+        (key) =>
           !selectedAttributes[key] ||
-          selectedAttributes[key].length !== arr.length ||
-          !arr.every((v, i) => selectedAttributes[key][i] === v)
-      )
-    ) {
+          selectedAttributes[key].length !== urlAttributes[key].length ||
+          !urlAttributes[key].every((v, i) => selectedAttributes[key][i] === v)
+      );
+    if (attributesChanged) {
+      console.log("Setting selectedAttributes:", urlAttributes);
       setSelectedAttributes(urlAttributes);
     }
   }, [
@@ -193,26 +220,17 @@ export const CatalogPage: React.FC = () => {
     urlMaxPrice,
     urlOnSale,
     urlInStock,
-    urlPage,
     urlSort,
+    urlPage,
     urlCategories,
     urlBrands,
     urlAttributes,
-    minPrice,
-    maxPrice,
-    onSale,
-    inStock,
-    page,
-    sort,
-    selectedCategories,
-    selectedBrands,
-    selectedAttributes,
     setMinPrice,
     setMaxPrice,
     setOnSale,
     setInStock,
-    setPage,
     setSort,
+    setPage,
     setSelectedCategories,
     setSelectedBrands,
     setSelectedAttributes,
@@ -222,15 +240,11 @@ export const CatalogPage: React.FC = () => {
 
   useEffect(() => {
     if (allCategories.length === 0) return;
+
     const categoriesFromQuery = searchParams.get("categories");
-    const brandsFromQuery = searchParams.get("brand");
     const slugs = [childSlug || parentSlug || slug].filter(Boolean);
 
-    if (brandsFromQuery && !categoriesFromQuery && !slug) {
-      setSelectedCategories([]);
-    } else if (categoriesFromQuery) {
-      setSelectedCategories(categoriesFromQuery.split(","));
-    } else if (slugs.length) {
+    if (!categoriesFromQuery && slugs.length > 0) {
       const matchedCategories = slugs
         .map((s: string | undefined) =>
           allCategories.find(
@@ -247,59 +261,15 @@ export const CatalogPage: React.FC = () => {
     }
   }, [slug, parentSlug, childSlug, allCategories, searchParams.toString()]);
 
-  const currentSort = sort;
   useEffect(() => {
-    const min = Number(searchParams.get("min")) || 0;
-    const max = Number(searchParams.get("max")) || 10000;
-    const sale = searchParams.get("sale") === "true";
-    const stock = searchParams.get("stock") === "true";
-    const categories = searchParams.get("categories")?.split(",") || [];
-    const brands =
-      searchParams.get("brand")?.split(",") ||
-      searchParams.get("brands")?.split(",") ||
-      [];
-    const sort = searchParams.get("sort") || "popularity";
-
-    const attributesFromURL: Record<string, string[]> = {};
-    searchParams.forEach((value, key) => {
-      if (key.startsWith("attr_")) {
-        const id = key.replace("attr_", "");
-        attributesFromURL[id] = value.split(",");
-      }
-    });
-
-    if (min !== minPrice) setMinPrice(min);
-    if (max !== maxPrice) setMaxPrice(max);
-    if (sale !== onSale) setOnSale(sale);
-    if (stock !== inStock) setInStock(stock);
-    if (
-      categories.length !== selectedCategories.length ||
-      !categories.every((val, idx) => val === selectedCategories[idx])
-    ) {
-      setSelectedCategories(categories);
+    if (slug === "sales") {
+      setOnSale(true);
+      setSelectedCategories([]);
+    } else if (slug === "news") {
+      setSort("date");
+      setSelectedCategories([]);
     }
-    if (
-      brands.length !== selectedBrands.length ||
-      !brands.every((val, idx) => val === selectedBrands[idx])
-    ) {
-      setSelectedBrands(brands);
-    }
-
-    const attributesChanged =
-      Object.keys(attributesFromURL).length !==
-        Object.keys(selectedAttributes).length ||
-      Object.entries(attributesFromURL).some(
-        ([key, arr]) =>
-          !selectedAttributes[key] ||
-          selectedAttributes[key].length !== arr.length ||
-          !arr.every((v, i) => selectedAttributes[key][i] === v)
-      );
-    if (attributesChanged) {
-      setSelectedAttributes(attributesFromURL);
-    }
-
-    if (sort !== currentSort) setSort(sort as SortOption);
-  }, [searchParams.toString()]);
+  }, [slug, setOnSale, setSort, setSelectedCategories]);
 
   const pageTitle = useMemo(() => {
     if (slug === "sales") return t("sales");
@@ -412,19 +382,6 @@ export const CatalogPage: React.FC = () => {
   const seoData = usePageData(metaUrl);
 
   useEffect(() => {
-    if (slug === "sales") {
-      setOnSale(true);
-      setSelectedCategories([]);
-    } else {
-      setOnSale(false);
-    }
-    if (slug === "news") {
-      setSort("date");
-      setSelectedCategories([]);
-    }
-  }, [slug, setOnSale, setSort, setSelectedCategories]);
-
-  useEffect(() => {
     if (brands && brands.length > 0) {
       setAllBrands(brands);
     }
@@ -461,70 +418,100 @@ export const CatalogPage: React.FC = () => {
   }, [attributesData, setAttributes]);
 
   return (
-    <Suspense fallback={null}>
-      <main className={s.page}>
-        <Head>
-          <title>{seoData.title || "Bilobrov"}</title>
-          <link rel="canonical" href={seoData.canonical || pathname} />
+    <main className={s.page}>
+      <Head>
+        <title>{seoData.title || "Bilobrov"}</title>
+        <link rel="canonical" href={seoData.canonical || pathname} />
 
-          {seoData.og_title && (
-            <meta property="og:title" content={seoData.og_title} />
-          )}
-          {seoData.og_description && (
-            <meta property="og:description" content={seoData.og_description} />
-          )}
-          {seoData.og_url && (
-            <meta property="og:url" content={seoData.og_url} />
-          )}
-          {seoData.og_locale && (
-            <meta property="og:locale" content={seoData.og_locale} />
-          )}
-          {seoData.og_type && (
-            <meta property="og:type" content={seoData.og_type} />
-          )}
-          {seoData.og_site_name && (
-            <meta property="og:site_name" content={seoData.og_site_name} />
-          )}
-          {seoData.twitter_card && (
-            <meta name="twitter:card" content={seoData.twitter_card} />
-          )}
+        {seoData.og_title && (
+          <meta property="og:title" content={seoData.og_title} />
+        )}
+        {seoData.og_description && (
+          <meta property="og:description" content={seoData.og_description} />
+        )}
+        {seoData.og_url && <meta property="og:url" content={seoData.og_url} />}
+        {seoData.og_locale && (
+          <meta property="og:locale" content={seoData.og_locale} />
+        )}
+        {seoData.og_type && (
+          <meta property="og:type" content={seoData.og_type} />
+        )}
+        {seoData.og_site_name && (
+          <meta property="og:site_name" content={seoData.og_site_name} />
+        )}
+        {seoData.twitter_card && (
+          <meta name="twitter:card" content={seoData.twitter_card} />
+        )}
 
-          <meta
-            name="robots"
-            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-          />
-        </Head>
+        <meta
+          name="robots"
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        />
+      </Head>
 
+      <Layout>
+        <Breadcrumbs aria-label="breadcrumb" className="breadcrumbs">
+          {breadcrumbs.map((breadcrumb, index) => (
+            <Link key={index} href={breadcrumb.link}>
+              {breadcrumb.name}
+            </Link>
+          ))}
+        </Breadcrumbs>
+      </Layout>
+
+      <Layout>
+        <AnimatePresence>
+          {isFilterOpen && (
+            <FiltersWithSuspense onClose={() => setIsFilterOpen(false)} />
+          )}
+        </AnimatePresence>
+
+        <div className={s.categoryHeader}>
+          <h1>{pageTitle}</h1>
+
+          <span>
+            {totalCount} {t("catalog.productsLength")}
+          </span>
+        </div>
+      </Layout>
+      {selectedCategories.length === 1 &&
+        childCategories.length > 0 &&
+        isMobile && (
+          <div className={s.childCategories}>
+            <ul className={s.scroller}>
+              {childCategories.map((cat: CategoryShort) => (
+                <li
+                  key={cat.id}
+                  className={
+                    selectedCategories.includes(cat.id.toString())
+                      ? s.active
+                      : ""
+                  }
+                  onClick={() => onTabClick(cat.id, cat.slug)}
+                >
+                  {cat.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      {childCategories.length > 0 && isMobile && (
         <Layout>
-          <Breadcrumbs aria-label="breadcrumb" className="breadcrumbs">
-            {breadcrumbs.map((breadcrumb, index) => (
-              <Link key={index} href={breadcrumb.link}>
-                {breadcrumb.name}
-              </Link>
-            ))}
-          </Breadcrumbs>
-        </Layout>
-
-        <Layout>
-          <AnimatePresence>
-            {isFilterOpen && (
-              <FiltersWithSuspense onClose={() => setIsFilterOpen(false)} />
-            )}
-          </AnimatePresence>
-
-          <div className={s.categoryHeader}>
-            <h1>{pageTitle}</h1>
-
-            <span>
-              {totalCount} {t("catalog.productsLength")}
-            </span>
+          <div className={s.scroller}>
+            <div className={s.scrollbarContainer}>
+              <div className={s.scrollbar}></div>і
+            </div>
           </div>
         </Layout>
+      )}
+
+      <Layout>
         {selectedCategories.length === 1 &&
           childCategories.length > 0 &&
-          isMobile && (
+          !isMobile && (
             <div className={s.childCategories}>
-              <ul className={s.scroller}>
+              <ul>
                 {childCategories.map((cat: CategoryShort) => (
                   <li
                     key={cat.id}
@@ -542,89 +529,61 @@ export const CatalogPage: React.FC = () => {
             </div>
           )}
 
-        {childCategories.length > 0 && isMobile && (
-          <Layout>
-            <div className={s.scroller}>
-              <div className={s.scrollbarContainer}>
-                <div className={s.scrollbar}></div>і
-              </div>
-            </div>
-          </Layout>
+        <div className={s.filterController}>
+          <button onClick={() => setIsFilterOpen(true)}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 12H18M3 6H21M9 18H15"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {t("catalog.filters")}
+          </button>
+          <div className={s.sort}>
+            <CustomSortDropdown sort={sort} />
+          </div>
+        </div>
+
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <ul ref={productsRef} className={s.list}>
+            {products
+              .filter((product) => product && product.slug && product.id)
+              .map((product) => (
+                <ProductItem key={product.id} info={product} />
+              ))}
+          </ul>
         )}
 
-        <Layout>
-          {selectedCategories.length === 1 &&
-            childCategories.length > 0 &&
-            !isMobile && (
-              <div className={s.childCategories}>
-                <ul>
-                  {childCategories.map((cat: CategoryShort) => (
-                    <li
-                      key={cat.id}
-                      className={
-                        selectedCategories.includes(cat.id.toString())
-                          ? s.active
-                          : ""
-                      }
-                      onClick={() => onTabClick(cat.id, cat.slug)}
-                    >
-                      {cat.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+        {!isLoading && totalCount > 20 && (
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={(newPage: number) => {
+              setPage(newPage);
+              const catalogTop = document.querySelector(`body`);
+              catalogTop?.scrollIntoView({
+                block: "start",
+              });
+            }}
+          />
+        )}
+      </Layout>
+    </main>
+  );
+}
 
-          <div className={s.filterController}>
-            <button onClick={() => setIsFilterOpen(true)}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 12H18M3 6H21M9 18H15"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              {t("catalog.filters")}
-            </button>
-            <div className={s.sort}>
-              <CustomSortDropdown sort={sort} />
-            </div>
-          </div>
-
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <ul ref={productsRef} className={s.list}>
-              {products
-                .filter((product) => product && product.slug && product.id)
-                .map((product) => (
-                  <ProductItem key={product.id} info={product} />
-                ))}
-            </ul>
-          )}
-
-          {!isLoading && totalCount > 20 && (
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={(newPage: number) => {
-                setPage(newPage);
-                const catalogTop = document.querySelector(`body`);
-                catalogTop?.scrollIntoView({
-                  block: "start",
-                });
-              }}
-            />
-          )}
-        </Layout>
-      </main>
+export default function Page() {
+  return (
+    <Suspense fallback={null}>
+      <CatalogPageInner />
     </Suspense>
   );
-};
-
-export default CatalogPage;
+}

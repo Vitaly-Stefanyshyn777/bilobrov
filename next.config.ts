@@ -2,9 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["bilobrov.projection-learn.website"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "bilobrov.projection-learn.website",
+        pathname: "/**",
+      },
+    ],
   },
-  /* config options here */
 };
 
 export default nextConfig;

@@ -1,7 +1,5 @@
-// import CatalogPage from "@/components/CatalogPage/CatalogPage";
-
-import CatalogPage from "../../page";
+import CatalogPageInner from "@/components/CatalogPageInner/CatalogPageInner";
 
 export default function CatalogSlugPage() {
-  return <CatalogPage />;
+  return <CatalogPageInner />;
 }
