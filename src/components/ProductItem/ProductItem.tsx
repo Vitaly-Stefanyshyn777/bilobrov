@@ -3,7 +3,7 @@ import { ProductInfo } from "../../types/productTypes";
 import { StarRating } from "../StarRating/StarRating";
 import WishlistButton from "../WishlistButton/WishlistButton";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import Link from "next/link";
+
 import { useProductStore } from "@/store/products/useProductStore";
 import Image from "next/image";
 import type { ProductStore } from "@/store/products/useProductStore";
@@ -52,7 +52,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({
           (info.stock_quantity ?? 0) < 1 && s.notAvailable
         } `}
       >
-        <Link className={s.link} href={`/product/${info.slug}/${info.id}`} />
+        {/* <Link className={s.link} href={`/product/${info.slug}/${info.id}`} /> */}
         <div className={s.block}>
           <div className={s.productImage}>
             <div className={s.markersBlock}>
@@ -104,7 +104,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({
               </div>
             )}
             <WishlistButton productId={info.id} />
-            <div className={`${s.cart}`} title="Додати в корзину">
+            {/* <div className={`${s.cart}`} title="Додати в корзину">
               <svg
                 viewBox="0 0 22 22"
                 fill="none"
@@ -117,7 +117,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
           {brandName && <p className={s.productBrand}>{brandName}</p>}
           {certificate && <p className={s.productBrand}>Bilobrov</p>}

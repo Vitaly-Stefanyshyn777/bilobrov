@@ -55,8 +55,8 @@
     }
 
     svg {
-      width: 6.6vw;
-      height: 6.6vw;
+      /* width: 6.6vw;
+      height: 6.6vw; */
     }
   }
 
@@ -233,6 +233,44 @@
       border-bottom: 1px solid rgba(255, 255, 255, 1);
     }
   }
+
+  .instaLink {
+    display: flex;
+    align-items: center;
+    gap: 1.3vw;
+    width: fit-content;
+  }
+
+  .instaTextBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1.3vw;
+  }
+  .instaNick {
+    font-family: var(--font-manrope);
+    font-size: 1.3vw;
+    font-weight: 600;
+    line-height: 1.3vw;
+    margin-bottom: 0.5vw;
+    color: #fff;
+  }
+  .instaSubscribe {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-manrope);
+    font-size: 0.9vw;
+    font-weight: 500;
+    line-height: 1.2vw;
+    color: #fff;
+    gap: 0.5vw;
+  }
+  .instaArrow {
+    width: 0.9vw;
+    height: 0.9vw;
+    stroke: #ffc43a;
+    margin-left: 0.3vw;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -250,8 +288,8 @@
 
         div {
           span:nth-child(1) {
-            font-size: 4.8vw;
-            line-height: 6.6vw;
+            /* font-size: 4.8vw;
+            line-height: 6.6vw; */
           }
 
           span:nth-child(2) {

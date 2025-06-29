@@ -9,7 +9,7 @@ import s from "./Footer.module.css";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Trans, useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+
 import { MailingFormBlock } from "../MailingFormBlock/MailingFormBlock";
 import Image from "next/image";
 
@@ -29,21 +29,19 @@ export const Footer = () => {
     <footer className={s.footer}>
       <Layout>
         <div className={s.instaBlock}>
-          <a
-            target="__blank"
-            href="https://www.instagram.com/bilobrov_cosmetics/"
-          >
+          <div className={s.instaLink}>
             <Image
               src="/icons/footer-logo.svg"
               alt="Logo"
               width={120}
               height={40}
             />
-            <div>
-              <span>@bilobrov_cosmetics</span>
-              <span>
+            <div className={s.instaTextBlock}>
+              <span className={s.instaNick}>@bilobrov_cosmetics</span>
+              <span className={s.instaSubscribe}>
                 {t("footer.instagramBlock.subscribe")}
                 <svg
+                  className={s.instaArrow}
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +55,7 @@ export const Footer = () => {
                 </svg>
               </span>
             </div>
-          </a>
+          </div>
 
           <div className={s.instaTitle}>
             <span>{t("footer.instagramBlock.label")}</span>
@@ -96,10 +94,9 @@ export const Footer = () => {
           <div className={s.footerInfoBlocks}>
             <div className={s.supportBlock}>
               <div className={s.linkBlock}>
-                <a href="tel:+380674811650">+38 (067) 481 16 50</a>
-                <a href="mailto:support@bilobrov.cosmetics">
-                  support@bilobrov.cosmetics
-                </a>
+                <span>+38 (067) 481 16 50</span>
+                <br />
+                <span>support@bilobrov.cosmetics</span>
               </div>
 
               <div className={s.scheduleBlock}>
@@ -107,7 +104,7 @@ export const Footer = () => {
                 <p>{t("footer.support.workTime")}</p>
               </div>
 
-              <a className={s.tgLink} href="">
+              <div className={s.tgLink}>
                 <div className={s.icon}>
                   <svg
                     viewBox="0 0 22 22"
@@ -118,7 +115,7 @@ export const Footer = () => {
                   </svg>
                 </div>
                 <span>ТELEGRAM</span>
-              </a>
+              </div>
             </div>
 
             {isMobile && <MailingFormBlock />}
@@ -130,8 +127,8 @@ export const Footer = () => {
         </div>
         <div className={s.paymentBlock}>
           <div className={s.paymentLinks}>
-            <Link href="/support#policy">{t("footer.privacyPolicy")}</Link>
-            <Link href="/support#offer">{t("footer.offer")}</Link>
+            <span>{t("footer.privacyPolicy")}</span>
+            <span>{t("footer.offer")}</span>
           </div>
 
           {isMobile && (
