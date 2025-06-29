@@ -122,6 +122,14 @@ export const ProductItem: React.FC<ProductItemProps> = ({
           {brandName && <p className={s.productBrand}>{brandName}</p>}
           {certificate && <p className={s.productBrand}>Bilobrov</p>}
           <p className={s.productName}>{info.name}</p>
+          {typeof info.short_description === "string" ? (
+            <p
+              className={s.shortDesc}
+              dangerouslySetInnerHTML={{ __html: info.short_description }}
+            />
+          ) : (
+            <>{info.short_description}</>
+          )}
           <div className={s.ratingBlock}>
             <StarRating isMobile={isMobile} rating={localAverage} />
             <span>({currentReviews.length})</span>
