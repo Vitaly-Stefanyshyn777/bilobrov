@@ -17,6 +17,8 @@ export interface ProductInfo {
   quantity: number;
   brands: { name: string }[];
   short_description?: string;
+  short_description_en?: string;
+  short_description_uk?: string;
   categories: Category[];
   variations: number[];
   attributes: {
@@ -76,5 +78,5 @@ export interface Brand {
   id: number;
   name: string;
   slug: string;
-  [key: string]: unknown // для backward compatibility, якщо є додаткові поля
+  [key: string]: unknown; // для backward compatibility, якщо є додаткові поля
 }

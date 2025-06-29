@@ -20,7 +20,7 @@ body {
 
 main {
   position: relative;
-  z-index: 9999;
+  /* z-index: 9999; */
   flex: 1;
   flex-shrink: 0;
   min-height: 100vh;

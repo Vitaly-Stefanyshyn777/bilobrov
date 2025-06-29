@@ -32,8 +32,8 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
   }, []);
 
   const languages = [
+    { code: "en", label: "Eng" },
     { code: "ua", label: "Укр" },
-    { code: "ru", label: "Ру" },
   ];
 
   return (

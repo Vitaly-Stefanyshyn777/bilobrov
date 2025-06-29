@@ -1,0 +1,662 @@
+{
+  "thanks": "Thank you for subscribing",
+  "reset": "Reset",
+  "sales": "Sales",
+  "all": "All products",
+  "details": "Details",
+  "categoryLink": "Go to category",
+  "deleteAll": "Delete all",
+  "delete": "Delete",
+
+  "productList": {
+    "sales": "Sales",
+    "novelty": "New arrivals",
+    "bestsellers": "Bestsellers"
+  },
+  "homePage": {
+    "newArrivals": {
+      "first": "New",
+      "second": "Arrivals"
+    },
+    "bestsellers": {
+      "first": "Bestselling",
+      "second": "Products"
+    },
+    "faceCare": {
+      "title": {
+        "first": "Facial",
+        "second": "Care"
+      },
+      "largePlate": "Creams"
+    },
+    "decorative": {
+      "title": {
+        "first": "Decorative",
+        "second": "Cosmetics"
+      },
+      "largePlate": "Lipstick"
+    }
+  },
+  "brandsSection": {
+    "brandsTitle": {
+      "first": "Popular",
+      "second": "Brands"
+    },
+    "allBrands": "All brands"
+  },
+
+  "homeAbout": {
+    "title": "About our brand",
+    "description": "We create products that bring care, confidence, and comfort to every woman. Every detail is inspired by self-love and a desire to make beauty accessible to all!",
+    "moreLink": "Learn more about us",
+    "author": {
+      "firstName": "Viktoria",
+      "lastName": "Bilobrov"
+    }
+  },
+  "homeServices": {
+    "services": [
+      {
+        "icon": "icon-free-shipping",
+        "title": "Free shipping across Ukraine",
+        "description": "Your favorite Bilobrov products delivered without extra cost to any corner of Ukraine."
+      },
+      {
+        "icon": "icon-psychiatry",
+        "title": "Support and consultation",
+        "description": "Our managers are always ready to help you choose the right product and answer your questions."
+      },
+      {
+        "icon": "icon-gift-card",
+        "title": "Accumulative cashback system",
+        "description": "With every purchase at Bilobrov, you earn cashback that makes your future orders more rewarding."
+      },
+      {
+        "icon": "icon-return-box",
+        "title": "Easy exchange and returns",
+        "description": "We value your trust and guarantee hassle-free exchanges and returns. If a product doesn’t suit you, we’ll quickly replace it."
+      }
+    ]
+  },
+  "cashbackSection": {
+    "label": "Special offers",
+    "title": "Cashback on purchases",
+    "description": "Every purchase brings more than just pleasure. Accumulate cashback at every stage with Bilobrov and use it for even better deals in the future.",
+    "details": "Learn more"
+  },
+  "footer": {
+    "instagramBlock": {
+      "label": "Instagram",
+      "description": "Follow our brand on social media",
+      "subscribe": "Subscribe"
+    },
+    "support": {
+      "workTimeLabel": "Support hours:",
+      "workTime": "Mon–Fri: 09:00–22:00 Sat–Sun: 10:00–20:00",
+      "telegram": "TELEGRAM"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "offer": "Offer Agreement",
+    "rights": "©2024 Bilobrov Cosmetics. All rights reserved.",
+    "developedBy": "Website developed by: <1>Before/After</1>"
+  },
+  "footerNavigation": {
+    "customers": {
+      "title": "Customers",
+      "faq": "FAQ",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "returns": "Exchange & Returns",
+      "bonusProgram": "Bonus program"
+    },
+    "company": {
+      "title": "Bilobrov Cosmetics",
+      "about": "About us",
+      "blog": "Blog",
+      "account": "My account",
+      "contacts": "Contacts"
+    }
+  },
+  "mailingForm": {
+    "subscribe": "Subscribe",
+    "newsletter": "to newsletter",
+    "placeholder": "Enter your e-mail"
+  },
+  "cartPopup": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "orderAmount": "Order amount:",
+    "discountAmount": "Discount amount:",
+    "deliveryCost": "Delivery cost:",
+    "free": "Free",
+    "total": "TOTAL:",
+    "checkout": "Checkout",
+    "continueShopping": "Continue shopping",
+    "youMayLike": "You may also like:"
+  },
+  "wishlistPopup": {
+    "titleMobile": "Wishlist",
+    "titleDesktopPart1": "My",
+    "titleDesktopPart2": "Wishlist",
+    "empty": "Your wishlist is empty"
+  },
+  "accountPage": {
+    "welcome": {
+      "hello": "Welcome!",
+      "helloNoName": "Welcome!",
+      "welcomeText": "Welcome to your BILOBROV CLUB account!",
+      "descText": "Here you can view your bonuses, track orders, monitor accumulated discounts, and be the first to learn about new arrivals and promotions. All club privileges at your fingertips!"
+    },
+    "tabs": {
+      "main": "Home",
+      "bonus": "Bonus card",
+      "order": "My orders",
+      "wishlist": "Wishlist",
+      "contact": "Contact details",
+      "password": "Change password",
+      "address": "My addresses"
+    },
+    "logout": {
+      "button": "Log out",
+      "confirmText": "Log out",
+      "titleText": "Are you leaving?",
+      "descText": "Your lips haven’t said “thank you” for the new lipstick yet!",
+      "cancelText": "Stay"
+    }
+  },
+  "bonus": {
+    "title1": "Bonus",
+    "title2": "Card",
+    "description1": "This is your BILOBROV CLUB bonus card!",
+    "description2": "It’s designed to make every purchase even more enjoyable. Earn bonuses for purchases, reviews, and social activity, then redeem them for great discounts. With this card, you’re always one step closer to your favorite products.",
+    "cardBalance": "Card balance:",
+    "bonuses": "bonuses",
+    "transactions": "Card transactions:"
+  },
+  "orders": {
+    "title1": "My",
+    "title2": "Orders",
+    "pending": "Order is being prepared",
+    "processing": "Order in transit",
+    "completed": "Order delivered",
+    "unknown": "Unknown status",
+    "orderSum": "Order total:",
+    "more": "more",
+    "orderInfo": "Order details:",
+    "delivery": "Delivery",
+    "recipient": "Recipient",
+    "productCode": "Product code",
+    "orderAmount": "Order amount:",
+    "discountAmount": "Discount amount:",
+    "shippingCost": "Shipping cost:",
+    "free": "Free",
+    "total": "TOTAL:",
+    "from": "from"
+  },
+  "updateInfo": {
+    "contact": "Contact",
+    "data": "details",
+    "personalInfo": "Personal information",
+    "name": "First name",
+    "secondName": "Last name",
+    "birthday": "Date of birth",
+    "contacts": "Contacts",
+    "phone": "Phone number",
+    "namePlaceholder": "Your first name",
+    "secondNamePlaceholder": "Your last name",
+    "save": "Save changes",
+    "saved": "Changes saved",
+    "errors": {
+      "nameRequired": "First name is required",
+      "nameMin": "First name must be at least 2 characters",
+      "secondNameRequired": "Last name is required",
+      "secondNameMin": "Last name must be at least 2 characters",
+      "birthdayRequired": "Date of birth is required",
+      "birthdayMax": "Date of birth cannot be in the future",
+      "phoneRequired": "Phone number is required",
+      "phoneValid": "Enter a valid phone number",
+      "emailValid": "Invalid email address"
+    }
+  },
+  "resetPassword": {
+    "change": "Change",
+    "password": "Password",
+    "currentPassword": "Current password",
+    "currentPasswordPlaceholder": "Your current password",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Enter a new password",
+    "confirmPassword": "Confirm new password",
+    "confirmPasswordPlaceholder": "Repeat the new password",
+    "forgot": "Forgot password?",
+    "save": "Save changes",
+    "loading": "Loading...",
+    "errors": {
+      "passwordsMismatch": "Passwords do not match"
+    },
+    "success": {
+      "passwordChanged": "Password changed successfully"
+    }
+  },
+  "address": {
+    "my": "My",
+    "addresses": "addresses",
+    "addNew": "Add new address",
+    "noSaved": "You have no saved addresses",
+    "addressNumber": "Address #{{number}}",
+    "city": "City",
+    "department": "Branch",
+    "street": "Street",
+    "house": "House",
+    "entrance": "Entrance",
+    "apartment": "Apartment",
+    "recipient": "Recipient",
+    "main": "Primary address",
+    "delete": "Delete",
+    "cancel": "Keep",
+    "confirmTitle": "Are you sure?",
+    "confirmDesc": "Your cosmetics have already fallen in love with this address!"
+  },
+  "addAddress": {
+    "editTitle": "Edit address",
+    "newTitle": "Address #{{number}}",
+    "mainAddress": "Primary address",
+    "recipientName": "Recipient’s first name",
+    "recipientSurname": "Recipient’s last name",
+    "recipientMiddlename": "Recipient’s middle name",
+    "recipientPhone": "Recipient’s phone",
+    "deliveryMethod": "Delivery method",
+    "city": "City",
+    "street": "Street",
+    "branchNumber": "Branch no.",
+    "placeholderName": "Recipient’s first name",
+    "placeholderSurname": "Recipient’s last name",
+    "placeholderMiddlename": "Recipient’s middle name",
+    "selectOnMap": "Select on map",
+    "house": "House",
+    "entrance": "Entrance",
+    "apartment": "Apartment",
+    "instructions": "Additional instructions for the courier",
+    "instructionsPlaceholder": "Help the courier find you faster",
+    "saveChanges": "Save changes"
+  },
+  "delivery": {
+    "department": "To branch",
+    "courier": "Courier",
+    "locker": "Locker"
+  },
+  "order": {
+    "makeMain": "Make this address primary",
+    "next": "Next",
+    "contactDetails": "Contact details",
+    "delivery": "Delivery",
+    "payment": "Payment",
+    "firstTime": "First time ordering",
+    "regularCustomer": "I’m a regular customer",
+    "fields": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "middleName": "Middle name",
+      "phone": "Phone number",
+      "email": "E-mail"
+    },
+    "placeholders": {
+      "firstName": "Your first name",
+      "lastName": "Your last name",
+      "middleName": "Your middle name",
+      "phone": "Your phone number",
+      "email": "Your e-mail"
+    },
+    "recipientContactDetails": "Recipient’s contact details",
+    "checkboxes": {
+      "receiver": "I am the recipient",
+      "register": "Register on the site and get access to special bonuses"
+    },
+    "onlinePayment": "Online payment via WayForPay",
+    "cod": "Cash on delivery"
+  },
+  "orderSuccess": {
+    "thankYou": "Thank you for being with us!",
+    "yourOrder": "Your order",
+    "success": "was successful",
+    "orderNumber": "Order №",
+    "orderDate": "Order date",
+    "deliveryAddress": "Delivery address",
+    "paymentMethod": "Payment method",
+    "recipient": "Recipient",
+    "contactNumber": "Contact number",
+    "orderTotal": "Order total",
+    "discountTotal": "Discount total",
+    "deliveryCost": "Delivery cost",
+    "free": "Free",
+    "totalToPay": "Total to pay",
+    "backHome": "Back to home"
+  },
+  "orderPanel": {
+    "totalToPay": "Total to pay",
+    "emptyCart": "Cart is empty",
+    "orderAmount": "Order amount",
+    "discountAmount": "Discount amount",
+    "couponDiscount": "Coupon discount",
+    "discountBonus": "Bonus discount",
+    "deliveryCost": "Delivery cost",
+    "free": "Free",
+    "total": "TOTAL"
+  },
+  "offertTab": {
+    "title1": "Offer",
+    "title2": "Agreement"
+  },
+  "policyTab": {
+    "title1": "Privacy",
+    "title2": "Policy"
+  },
+  "orderFooter": {
+    "supportTime": "Support hours 12:00–18:00",
+    "telegram": "TELEGRAM",
+    "deliveryTerms": "Delivery terms",
+    "paymentTerms": "Payment terms"
+  },
+  "paymentTab": {
+    "title": {
+      "first": "Payment",
+      "second": "Terms"
+    },
+    "subtitle": "To place an order, simply select products, add them to your cart, and provide shipping details. You will then be offered secure and convenient payment options:",
+    "paymentUl": [
+      {
+        "title": "Online payment on site",
+        "subTitle": "Fast, convenient, and secure. After placing your order, you’ll be redirected to our payment partner WayForPay to complete your card transaction."
+      },
+      {
+        "title": "Bank transfer",
+        "subTitle": "If you prefer to transfer funds directly, contact our support team and we’ll provide you with bank details."
+      }
+    ],
+    "methodsTitle": "What else you should know:",
+    "notes": [
+      "All orders must be paid 100% before shipment.",
+      "Prices on the site reflect any available discounts.",
+      "You will receive an email confirmation after payment.",
+      "If there’s a pricing error or item is out of stock, we’ll contact you and may cancel the order; a full refund will be issued within 7 days.",
+      "Any bank fees applied during payment are your responsibility and not included in the product price.",
+      "A bank or payment system receipt serves as payment confirmation."
+    ],
+    "bottomNote": "We hope the payment terms are clear. If you have any questions, please contact support."
+  },
+  "deliveryTab": {
+    "title": "Delivery terms",
+    "subtitle": "We deliver your orders across Ukraine via Nova Poshta. After order confirmation, we dispatch your package within three days.",
+    "methodsTitle": "Available delivery options:",
+    "methods": {
+      "warehouse": "Delivery to Nova Poshta branch or locker",
+      "courier": "Courier delivery to your door",
+      "pickup": "Store pickup"
+    },
+    "noteTitle": "Important to know:",
+    "notes": [
+      "If you decide to cancel before shipment, just let us know and we’ll cancel your order.",
+      "Upon receipt, please inspect the packaging and contents at the branch or on delivery.",
+      "If damage is found, a claim form will be created with the carrier. If everything is fine, you may sign for receipt.",
+      "If you don’t pick up within 5 business days, we’ll contact you to arrange redelivery.",
+      "In case of refusal or data errors, return and shipping costs are borne by the customer."
+    ]
+  },
+  "clientsSupport": {
+    "customers": "Customers",
+    "delivery": "Delivery terms",
+    "payment": "Payment terms",
+    "returnExchange": "Exchange & Returns",
+    "faq": "FAQ",
+    "contacts": "Our contacts",
+    "legal": "Legal information",
+    "offer": "Offer agreement",
+    "offerText": "Offer agreement text...",
+    "policy": "Privacy policy"
+  },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "returnTab": {
+    "title1": "Exchange &",
+    "title2": "Returns",
+    "description": "We offer convenient exchanges and returns in the following cases:",
+    "reason1": "If packaging is damaged during Nova Poshta delivery, exchange or return is possible.",
+    "reason2": "If dispensers or other mechanisms are defective, we’ll provide exchange or return.",
+    "reason3": "If the active product doesn’t suit you and was used as recommended, exchange or return is possible."
+  },
+  "faqTab": {
+    "title1": "Frequently",
+    "title2": "Asked Questions"
+  },
+  "contactTab": {
+    "title1": "Our",
+    "title2": "Contacts",
+    "sendLetter": "Send a message",
+    "contactUs": "Contact us",
+    "callUs": "Call us",
+    "supportChat": "Chat with support",
+    "visitUs": "Visit us",
+    "viewOnMap": "View on Google Maps",
+    "error": "Error"
+  },
+  "brands": {
+    "title": "Brands",
+    "total": "{{count}} brands",
+    "breadcrumbs": {
+      "home": "Home",
+      "brands": "Brands"
+    },
+    "noBrands": "No brands available",
+    "alphabet": "A–Z",
+    "viewBrand": "View brand",
+    "scrollHint": "Scroll to navigate brands"
+  },
+  "breadCrumbs": {
+    "main": "Home",
+    "brands": "Brands",
+    "about": "About us",
+    "certificates": "Gift certificates"
+  },
+  "product": {
+    "similarProductsTitle1": "Similar",
+    "similarProductsTitle2": "Products",
+    "buyWithProductsTitle1": "Customers also",
+    "buyWithProductsTitle2": "Bought"
+  },
+  "reviews": {
+    "titlePart1": "Product",
+    "titlePart2": "Reviews",
+    "addReview": "Leave a review"
+  },
+  "reviewsCount": "{{count}} reviews",
+  "addToCart": "Add to cart",
+  "inStock": "In stock",
+  "outOfStock": "Out of stock",
+  "productCode": "Product code",
+  "authorize": "Log in",
+  "getBonuses": "and earn bonuses",
+  "needHelp": "Need help?",
+  "getConsultation": "Get consultation",
+  "selectColor": "Select color",
+  "selectVolume": "Select volume",
+  "productAccordion": {
+    "description": "Description",
+    "characteristics": "Characteristics",
+    "appointment": "Usage",
+    "skinType": "Skin type",
+    "contraindication": "Contraindications",
+    "activeIngredients": "Active ingredients",
+    "components": "Composition",
+    "conditions": "Usage conditions"
+  },
+  "reviewPopup": {
+    "title": "Leave a review",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "phone": "Phone number",
+    "phonePlaceholder": "Your phone number",
+    "reviewLabel": "Review text",
+    "reviewPlaceholder": "Type your review",
+    "attachPhoto": "Attach photo",
+    "submit": "Submit review",
+    "thanks": "Thank you for your review!",
+    "success": "Your review has been posted successfully!",
+    "backHome": "Back to home",
+    "error": "Name or email missing",
+    "errorDefault": "Something went wrong"
+  },
+  "catalog": {
+    "productsLength": "products",
+    "filters": "Filters",
+    "filterSale": "On sale",
+    "filterInStock": "In stock",
+    "filterApply": "Apply filters",
+    "filterCat": "Categories",
+    "filterBrands": "Brands",
+    "popularity": "Popularity",
+    "date": "Newest",
+    "asc": "Price: low to high",
+    "desc": "Price: high to low",
+    "from": "From",
+    "to": "To",
+    "searchAttr": "Enter a name to search"
+  },
+  "register": {
+    "welcomeTitle": "Hello, beauty!",
+    "loginTitle": "Welcome back!",
+    "welcomeText": "We’re happy to welcome you to Bilobrov – let’s create your account",
+    "loginText": "We’re glad to see you back at Bilobrov. Enjoy your shopping!",
+    "email": "Email",
+    "emailPlaceholder": "Your email",
+    "name": "First name",
+    "namePlaceholder": "Enter your name",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "loading": "Please wait...",
+    "registerButton": "Register",
+    "loginButton": "Log in",
+    "haveAccount": "Already have an account? ",
+    "noAccount": "Don’t have an account yet? ",
+    "switchToLogin": " Log in",
+    "switchToRegister": " Register"
+  },
+  "variationPopup": {
+    "select": "Select options",
+    "apply": "ADD TO CART"
+  },
+  "certificatePage": {
+    "titleLine1": "Gift",
+    "titleLine2": "Certificates"
+  },
+  "bonusHero": "Great deals, cashback, and gifts with a virtual loyalty card",
+  "bonusSection": {
+    "title1": "Join",
+    "title2": "Bilobrov club",
+    "description": "Enjoy up to 50% discounts, cashback starting from 3500 UAH, redeemable for additional discounts online and offline, plus early access to new arrivals and promotions.",
+    "bonusNote": "*1 BONUS = 1 UAH",
+    "register": "Register"
+  },
+  "bonusSystem": {
+    "title1": "How our",
+    "title2": "bonus system works",
+    "buyFrom": "On purchases from",
+    "cashback": "Cashback",
+    "also": "Also",
+    "birthday": "Birthday bonus",
+    "story": "For an Instagram story",
+    "review": "For a review",
+    "points": "points"
+  },
+  "bonusFaq": {
+    "title1": "Any",
+    "title2": "questions?"
+  },
+  "aboutHero": {
+    "subtitle": "You come first",
+    "title": "With Bilobrov Cosmetics"
+  },
+  "bilobrovToday": {
+    "title": "today",
+    "brands": "brands",
+    "experience": "years of experience",
+    "team": "team members",
+    "clients": "clients in database",
+    "years": "years"
+  },
+  "philosophy": {
+    "subtitle": "The essence of Bilobrov seen by the founder",
+    "title": "Bilobrov Cosmetics — ",
+    "desc": "is my philosophy of beauty, where each product is a step toward confidence and comfort.",
+    "name": "Viktoria",
+    "surname": "Bilobrov"
+  },
+  "ourTeam": {
+    "title1": "Team",
+    "title2": "Bilobrov",
+    "title3": "Cosmetics & Clinics",
+    "count": "Professionals on our team"
+  },
+  "valuables": {
+    "title": "Our values",
+    "clientCareTitle": "Customer care",
+    "clientCareText": "We put customers first by providing personalized consultations and support. Every customer can count on professional assistance and warm service.",
+    "personalTitle": "Individual approach",
+    "personalText": "We consider your unique needs and offer products tailored to your expectations. Our managers and consultants help you choose the best for you.",
+    "qualityTitle": "Product quality",
+    "qualityText": "We carefully select each product to ensure its effectiveness and safety. You can trust that all items meet the highest standards."
+  },
+  "searchPlaceholder": "Enter product name to search",
+  "products": "Products",
+  "categories": "Categories",
+  "order-panel": {
+    "payWithBonuses": "Pay with bonuses",
+    "yourBonusBalance": "Your bonus balance",
+    "bonusRate": "1 bonus = 1 UAH",
+    "writeOffBonuses": "Redeem bonuses",
+    "payWithCoupons": "Redeem coupon",
+    "applyAll": "Redeem all",
+    "reset": "Reset",
+    "bonuses": "bonuses"
+  },
+  "coupon": {
+    "перевірка": "Check",
+    "застосувати": "Apply",
+    "allow": "Coupon applied 🎉",
+    "enter": "Enter coupon code"
+  },
+  "orderStep": {
+    "confirmOrder": "Confirm order",
+    "acceptTerms": "By confirming, I accept the terms:",
+    "privacyPolicy": "of the personal data processing and protection policy."
+  },
+  "forgot": {
+    "title": "Forgot password?",
+    "description": "Don’t worry, we’ll send you instructions to reset your password",
+    "email": "Email",
+    "emailPlaceholder": "Your email",
+    "send": "Reset password",
+    "loading": "Sending...",
+    "error": "Something went wrong. Please try again.",
+    "back": "Back to login",
+    "resetTitle": "Change password",
+    "resetDescription": "Create a new password for your account",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmPassword": "Confirm new password",
+    "confirmPasswordPlaceholder": "Repeat new password",
+    "resetSuccess": "Password changed successfully 🎉",
+    "resetError": "Something went wrong or passwords do not match.",
+    "setNewPassword": "Change password"
+  },
+  "gift": {
+    "nominal": "Denomination",
+    "fromName": "Sender’s name",
+    "fromNamePlaceholder": "Sender’s name",
+    "toName": "Recipient’s name",
+    "toNamePlaceholder": "Recipient’s name",
+    "toEmail": "Recipient’s e-mail",
+    "toEmailPlaceholder": "Recipient’s e-mail",
+    "message": "Message for recipient",
+    "messagePlaceholder": "Message for recipient"
+  }
+}
